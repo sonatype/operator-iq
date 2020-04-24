@@ -32,10 +32,9 @@ spec:
         - port: 8070
           type: http
       sonatypeWork: /sonatype-work
-    imageName: registry.connect.redhat.com/sonatype/nexus-iq-server
+    imageName: registry.connect.redhat.com/sonatype/nexus-iq-server:1.90.0-01-ubi-1
     imagePullPolicy: IfNotPresent
     imagePullSecret: ""
-    imageTag: 1.85.0-01-ubi
     licenseSecret: ""
     memory: 1Gi
     name: nxiq
