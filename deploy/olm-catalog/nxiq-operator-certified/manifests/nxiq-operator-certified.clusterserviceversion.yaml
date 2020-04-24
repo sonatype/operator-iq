@@ -1,0 +1,244 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  annotations:
+    alm-examples: |-
+      [
+        {
+          "apiVersion": "apm.nxiq.com/v1alpha1",
+          "kind": "NexusIQ",
+          "metadata": {
+            "name": "example-nexusiq"
+          },
+          "spec": {
+            "deployment": {
+              "postStart": {
+                "command": null
+              },
+              "preStart": {
+                "command": null
+              },
+              "terminationGracePeriodSeconds": 120
+            },
+            "fullnameOverride": "",
+            "imagePullSecrets": [],
+            "ingress": {
+              "annotations": {},
+              "enabled": false,
+              "hosts": [],
+              "path": "/",
+              "tls": []
+            },
+            "iq": {
+              "adminPort": 8071,
+              "applicationPort": 8070,
+              "configYaml": {
+                "createSampleData": true,
+                "server": {
+                  "adminConnectors": [
+                    {
+                      "port": 8071,
+                      "type": "http"
+                    }
+                  ],
+                  "applicationConnectors": [
+                    {
+                      "port": 8070,
+                      "type": "http"
+                    }
+                  ]
+                },
+                "sonatypeWork": "/sonatype-work"
+              },
+              "imageName": "registry.connect.redhat.com/sonatype/nexus-iq-server:1.90.0-01-ubi-1",
+              "imagePullPolicy": "IfNotPresent",
+              "imagePullSecret": "",
+              "licenseSecret": "",
+              "memory": "1Gi",
+              "name": "nxiq"
+            },
+            "nameOverride": "",
+            "persistence": {
+              "accessMode": "ReadWriteOnce",
+              "storageSize": "1Gi"
+            },
+            "service": {
+              "annotations": {},
+              "enabled": false,
+              "labels": {},
+              "ports": [
+                {
+                  "name": "nexus-service",
+                  "port": 80,
+                  "targetPort": 80
+                }
+              ]
+            },
+            "serviceAccount": {
+              "create": true,
+              "name": null
+            }
+          }
+        }
+      ]
+    capabilities: Basic Install
+  name: nxiq-operator-certified.v1.90.0
+  namespace: placeholder
+spec:
+  apiservicedefinitions: {}
+  customresourcedefinitions:
+    owned:
+    - kind: NexusIQ
+      name: nexusiqs.apm.nxiq.com
+      version: v1alpha1
+  displayName: Nxiq Operator Certified
+  icon:
+  - base64data: ""
+    mediatype: ""
+  install:
+    spec:
+      deployments:
+      - name: nxiq-operator-certified
+        spec:
+          replicas: 1
+          selector:
+            matchLabels:
+              name: nxiq-operator-certified
+          strategy: {}
+          template:
+            metadata:
+              labels:
+                name: nxiq-operator-certified
+            spec:
+              containers:
+              - env:
+                - name: WATCH_NAMESPACE
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: metadata.annotations['olm.targetNamespaces']
+                - name: POD_NAME
+                  valueFrom:
+                    fieldRef:
+                      fieldPath: metadata.name
+                - name: OPERATOR_NAME
+                  value: nxiq-operator-certified
+                - name: RELATED_IMAGE_IQ
+                  value: registry.connect.redhat.com/sonatype/nexus-iq-server:1.90.0-01-ubi-1
+                image: REPLACE_IMAGE
+                imagePullPolicy: Always
+                name: nxiq-operator-certified
+                resources: {}
+              serviceAccountName: nxiq-operator-certified
+      permissions:
+      - rules:
+        - apiGroups:
+          - ""
+          resources:
+          - pods
+          - services
+          - services/finalizers
+          - endpoints
+          - persistentvolumeclaims
+          - events
+          - configmaps
+          - secrets
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        - apiGroups:
+          - apps
+          resources:
+          - deployments
+          - daemonsets
+          - replicasets
+          - statefulsets
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        - apiGroups:
+          - ""
+          resources:
+          - namespaces
+          verbs:
+          - get
+        - apiGroups:
+          - ""
+          resources:
+          - configmaps
+          - secrets
+          verbs:
+          - '*'
+        - apiGroups:
+          - ""
+          resources:
+          - events
+          verbs:
+          - create
+        - apiGroups:
+          - monitoring.coreos.com
+          resources:
+          - servicemonitors
+          verbs:
+          - get
+          - create
+        - apiGroups:
+          - apps
+          resourceNames:
+          - nxiq-operator-certified
+          resources:
+          - deployments/finalizers
+          verbs:
+          - update
+        - apiGroups:
+          - ""
+          resources:
+          - pods
+          verbs:
+          - get
+        - apiGroups:
+          - apps
+          resources:
+          - replicasets
+          - deployments
+          verbs:
+          - get
+        - apiGroups:
+          - apm.nxiq.com
+          resources:
+          - '*'
+          verbs:
+          - create
+          - delete
+          - get
+          - list
+          - patch
+          - update
+          - watch
+        serviceAccountName: nxiq-operator-certified
+    strategy: deployment
+  installModes:
+  - supported: true
+    type: OwnNamespace
+  - supported: true
+    type: SingleNamespace
+  - supported: false
+    type: MultiNamespace
+  - supported: true
+    type: AllNamespaces
+  keywords:
+  - ""
+  maintainers:
+  - {}
+  maturity: alpha
+  provider: {}
+  version: 1.90.0
