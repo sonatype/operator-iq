@@ -120,7 +120,6 @@ The command removes all the Kubernetes components associated with the chart and 
 | `ingress.path`                              | Path for ingress rules. GCP users should set to `/*` | `/`                    |
 | `deployment.preStart.command`               | Command to run before starting the IQ Server container  | `nil`                   |
 | `deployment.postStart.command`              | Command to run after starting the IQ Server container  | `nil`                    |
-| `deployment.terminationGracePeriodSeconds`  | Update termination grace period (in seconds)        | 120s                    |
 | `persistence.storageClass` | The provisioner class                        | `-` (disables dynamic provisioning             |
 | `persistence.storageSize` | The amount of drive space to allocate                        | `1Gi`             |
 | `persistence.accessMode` | Default access mode                        | `ReadWriteOnce`             |

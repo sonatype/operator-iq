@@ -45,7 +45,6 @@ deployment:
   # Uncomment and modify this to run a command after starting the IQ Server
   postStart:
     command:    # '["/bin/sh", "-c", "ls"]'
-  terminationGracePeriodSeconds: 120
 
 ingress:
   enabled: false

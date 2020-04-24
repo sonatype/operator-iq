@@ -10,7 +10,6 @@ spec:
       command: null
     preStart:
       command: null
-    terminationGracePeriodSeconds: 120
   fullnameOverride: ""
   imagePullSecrets: []
   ingress:
