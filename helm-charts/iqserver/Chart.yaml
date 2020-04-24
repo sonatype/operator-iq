@@ -1,5 +1,5 @@
 apiVersion: v1
-appVersion: 1.84.0
+appVersion: 1.90.0
 description: Sonatype Nexus IQ Server continuously monitors your entire software supply
   chain
 home: https://www.sonatype.com/nexus-iq-server
@@ -13,7 +13,7 @@ keywords:
 - vulnerabilities
 - policy
 maintainers:
-- email: cloud-ops@sonatype.com
+- email: support@sonatype.com
   name: Sonatype
 name: iqserver
 version: 0.1.0

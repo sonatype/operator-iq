@@ -332,8 +332,8 @@ spec:
   - name: Nexus Lifecycle
     url: https://www.sonatype.com/product-nexus-lifecycle
   maintainers:
-  - email: cloud-ops@sonaype.com
-    name: Sonatype Cloud Ops
+  - email: support@sonaype.com
+    name: Sonatype
   maturity: alpha
   provider:
     name: Sonatype
