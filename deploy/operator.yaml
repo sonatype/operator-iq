@@ -29,3 +29,5 @@ spec:
                   fieldPath: metadata.name
             - name: OPERATOR_NAME
               value: "nxiq-operator-certified"
+            - name: RELATED_IMAGE_IQ
+              value: registry.connect.redhat.com/sonatype/nexus-iq-server:1.90.0-01-ubi-1

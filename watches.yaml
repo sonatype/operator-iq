@@ -3,3 +3,5 @@
   group: apm.nxiq.com
   kind: NexusIQ
   chart: helm-charts/iqserver
+  overrideValues:
+    iq.imageName: $RELATED_IMAGE_IQ
