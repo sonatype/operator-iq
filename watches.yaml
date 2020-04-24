@@ -1,0 +1,5 @@
+---
+- version: v1alpha1
+  group: apm.nxiq.com
+  kind: NexusIQ
+  chart: helm-charts/iqserver

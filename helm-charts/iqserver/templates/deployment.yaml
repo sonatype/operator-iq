@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "iqserver.fullname" . }}
+  labels:
+    app: {{ template "iqserver.fullname" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "iqserver.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "iqserver.fullname" . }}
+    spec:
+      {{- if .Values.iq.imagePullSecret }}
+      imagePullSecrets:
+        - name: {{ template "iqserver.fullname" . }}-imagepull
+      {{- end }}
+      containers:
+      - name: {{ template "iqserver.fullname" . }}
+        image: {{ .Values.iq.imageName }}:{{ .Values.iq.imageTag }}
+        ports:
+        - containerPort: {{ .Values.iq.applicationPort }}
+        {{- if .Values.deployment.terminationGracePeriodSeconds }}
+        terminationGracePeriodSeconds: {{ .Values.deployment.terminationGracePeriodSeconds }}
+        {{- end }}
+        lifecycle:
+          {{- if .Values.deployment.postStart.command }}
+          postStart:
+            exec:
+              command: {{ .Values.deployment.postStart.command }}
+          {{- end }}
+          {{- if .Values.deployment.preStart.command }}
+          preStart:
+            exec:
+              command: {{ .Values.deployment.preStart.command }}
+          {{- end }}
+        resources:
+          limits:
+            memory: {{ .Values.iq.memory }}
+        volumeMounts:
+          - mountPath: /sonatype-work
+            name: nxiq-pv-data
+          - mountPath: /etc/nexus-iq-server
+            name: config-volume
+  {{- if .Values.iq.licenseSecret }}
+          - mountPath: /etc/nexus-iq-license
+            name: license-volume
+  {{- end }}
+      volumes:
+        - name: nxiq-pv-data
+          persistentVolumeClaim:
+            claimName: {{ template "iqserver.fullname" . }}-data
+        - name: config-volume
+          configMap:
+            name: {{ template "iqserver.fullname" . }}
+            items:
+              - key: config.yml
+                path: config.yml
+  {{- if .Values.iq.licenseSecret }}
+        - name: license-volume
+          secret:
+            secretName: {{ template "iqserver.fullname" . }}-license
+  {{- end }}
