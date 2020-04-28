@@ -5,7 +5,7 @@ metadata:
     alm-examples: |-
       [
         {
-          "apiVersion": "apm.nxiq.com/v1alpha1",
+          "apiVersion": "sonatype.com/v1alpha1",
           "kind": "NexusIQ",
           "metadata": {
             "name": "example-nexusiq"
@@ -96,7 +96,7 @@ spec:
   customresourcedefinitions:
     owned:
     - kind: NexusIQ
-      name: nexusiqs.apm.nxiq.com
+      name: nexusiqs.sonatype.com
       version: v1alpha1
       description: Nexus IQ Server
       displayName: NexusIQ
@@ -300,7 +300,7 @@ spec:
           verbs:
           - get
         - apiGroups:
-          - apm.nxiq.com
+          - sonatype.com
           resources:
           - '*'
           verbs:

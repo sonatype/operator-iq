@@ -1,4 +1,4 @@
-apiVersion: apm.nxiq.com/v1alpha1
+apiVersion: sonatype.com/v1alpha1
 kind: NexusIQ
 metadata:
   name: example-nexusiq

@@ -86,7 +86,7 @@ rules:
   verbs:
   - get
 - apiGroups:
-  - apm.nxiq.com
+  - sonatype.com
   resources:
   - '*'
   verbs:
