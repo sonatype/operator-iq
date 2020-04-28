@@ -211,7 +211,7 @@ spec:
                   value: nxiq-operator-certified
                 - name: RELATED_IMAGE_IQ
                   value: registry.connect.redhat.com/sonatype/nexus-iq-server:1.90.0-01-ubi-1
-                image: registry.connect.redhat.com/sonatype/nxiq-operator-certified:1.90.0
+                image: registry.connect.redhat.com/sonatype/nxiq-operator-certified:1.90.0-1
                 imagePullPolicy: Always
                 name: nxiq-operator-certified
                 resources: {}
