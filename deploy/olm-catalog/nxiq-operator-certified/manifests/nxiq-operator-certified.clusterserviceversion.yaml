@@ -109,8 +109,7 @@ spec:
 
     Once the server instance is created by the operator and running,
     you'll want to expose the service as you see fit:
-    1. Create the service: `kubectl expose deployment --type=NodePort <full name of the new pod>`
-    2. Create a Route to that service for nexus.port (8081).
+    1. Create a Route to the new service for iq.applicationPort (8070).
 
     The Nexus IQ Server can be further configured via the NexusIQ custom resource definition:
 
@@ -122,7 +121,7 @@ spec:
     | `iq.adminPort`       | Port of the application connector. Must match the value in the `configYaml` property | `8071`            |
     | `iq.memory`          | The amount of RAM to allocate                                | `1Gi`             |
     | `iq.licenseSecret`   | The base-64 encoded license file to be installed at startup  | `""`              |
-    | `iq.configYaml`      | A YAML block which will be used as a configuration block for IQ Server. | See `values.yaml` |
+    | `iq.configYaml`      | A YAML block which will be used as a configuration block for IQ Server. | See YAML. |
     | `ingress.enabled`                           | Create an ingress for Nexus         | `true`                                  |
     | `ingress.annotations`                       | Annotations to enhance ingress configuration  | `{}`                          |
     | `ingress.tls.enabled`                       | Enable TLS                          | `true`                                 |
