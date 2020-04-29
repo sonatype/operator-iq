@@ -83,10 +83,11 @@ metadata:
     capabilities: Basic Install
     categories: "Security"
     description: |-
-      Nexus IQ Server is a policy engine powered by precise intelligence on open source components.
+      Nexus Lifecycle is an open source governance platform that continuously identifies risk,
+      automatically enforces policy, and provides visibility throughout the entire SDLC.
     containerImage: registry.connect.redhat.com/sonatype/nxiq-operator-certified
     repository: https://github.com/sonatype/operator-iq
-    createdAt: 2020-04-24
+    createdAt: 2020-04-29
     support: Sonatype
     certified: "true"
   name: nxiq-operator-certified.v1.90.0
@@ -101,9 +102,38 @@ spec:
       description: Nexus IQ Server
       displayName: NexusIQ
   description: |-
-    Nexus IQ Server is a policy engine powered by precise intelligence on open source components.
+    Nexus Lifecycle is an open source governance platform that continuously identifies risk,
+    automatically enforces policy, and provides visibility throughout the entire SDLC.
+    Developers leveraging open source require a solution that helps them make safer choices
+    while still delivering at DevOps speed.
+    Nexus Lifecycle empowers developers and security teams to choose the best components
+    and govern open source usage, ensuring organizations continue to innovate with less risk.
 
     ## Core Capabilities
+
+    * **Dependency Management**:
+      Generate a precise software bill of materials for all applications
+      to identify open source components and gather contextual direct
+      and transitive dependency information for faster action.
+    * **One-Click Remediation**:
+      Upgrade to the best components and versions based on real-time intelligence.
+      Available in your preferred IDE or a GitHub pull request.
+    * **Automated Open Source Policy Enforcement**:
+      Create custom security, license, and architectural policies based
+      on application type or organization and contextually enforce those policies
+      across every stage of the SDLC.
+    * **Continuous Monitoring**:
+      Real-time notifications of newly discovered defects,
+      as well as vulnerabilities based on component,
+      risk level or application/container affected.
+
+    ## Extras
+
+    * IDE Integrations: Eclipse, IntelliJ, and Visual Studio
+    * Source Control Integrations: GitHub, GitLab, and Bitbucket
+    * Chrome Browser Extension
+    * Red Hat Clair for Container Scanning
+
 
     ## Usage
 
@@ -129,7 +159,7 @@ spec:
     | `ingress.path`                              | Path for ingress rules. GCP users should set to `/*` | `/`                    |
     | `deployment.preStart.command`               | Command to run before starting the IQ Server container  | `nil`                   |
     | `deployment.postStart.command`              | Command to run after starting the IQ Server container  | `nil`                    |
-    | `persistence.storageClass` | The provisioner class                        | `-` (disables dynamic provisioning             |
+    | `persistence.storageClass` | The provisioner class                        | `-` (disables dynamic provisioning)            |
     | `persistence.storageSize` | The amount of drive space to allocate                        | `1Gi`             |
     | `persistence.accessMode` | Default access mode                        | `ReadWriteOnce`             |
     | `persistence.volumeConfiguration` | A YAML block to configure the persistent volume type. Defaults to `hostPath` which should not be used in production | `hostPath`             |
