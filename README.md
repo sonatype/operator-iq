@@ -11,9 +11,9 @@ and push your operator image to quay.io to make it available for installation.
    for a local Openshift 4 environment.
 2. Ensure you have a personal quay.io account.
 3. Build and deploy the operator image to your personal quay.io repository:
-   1. `operator-sdk build quay.io/<username>/nxiq-operator-certified`
+   1. `operator-sdk build quay.io/<username>/nxiq-operator-certified:[operator-version]`
    2. `docker login quay.io`
-   3. `docker push quay.io/<username>/nxiq-operator-certified`
+   3. `docker push quay.io/<username>/nxiq-operator-certified:[operator-version]`
 5. Make sure the new image on quay.io is public.
 6. Update the `deploy/operator.yaml` to point to your test image at quay.io.
 7. Install all the descriptors for the operator to your OpenShift cluster:
@@ -30,15 +30,15 @@ and push your operator image to quay.io to make it available for installation.
 ## Building for Production
 
 1. Rebuild the image: 
-   `operator-sdk build registry.connect.redhat.com/sonatype/nxiq-operator-certified`
+   `operator-sdk build registry.connect.redhat.com/sonatype/nxiq-operator-certified:[operator-version]`
 2. Follow the "Upload Your Image" instructions with IDs provided at
    https://connect.redhat.com/project/4049231/view to login and push 
    your docker image.
    1. `[image-id]` can be collected from `docker images`
    2. `[image-name]` is `nxiq-operator-certified`
-   3. `[tag]` is the next version that's not already there, such as: `1.90.0-1`
+   3. `[tag]` is the operator version that's not already there in the form: `1.90.0-1`
 3. Package and upload metadata to Operator Config
-   1. `cd bundle; zip -rv ../nxiq-operator-certified-metadata.zip .`
+   1. Create the bundle zip file: `./scripts/bundle.sh`
    2. Upload the zip to "Operator Config" of
      https://connect.redhat.com/project/4049231/view
    3. Once it successfully scans, which can take up to an hour, publish the config.

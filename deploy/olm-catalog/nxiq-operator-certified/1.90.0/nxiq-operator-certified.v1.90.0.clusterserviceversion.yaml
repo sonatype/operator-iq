@@ -85,7 +85,7 @@ metadata:
     description: |-
       Nexus Lifecycle is an open source governance platform that continuously identifies risk,
       automatically enforces policy, and provides visibility throughout the entire SDLC.
-    containerImage: registry.connect.redhat.com/sonatype/nxiq-operator-certified
+    containerImage: registry.connect.redhat.com/sonatype/nxiq-operator-certified:1.90.0
     repository: https://github.com/sonatype/operator-iq
     createdAt: 2020-05-01
     support: Sonatype
@@ -145,7 +145,7 @@ spec:
 
     | Parameter            | Description                                                  | Default           |
     | -------------------- | ------------------------------------------------------------ | ----------------- |
-    | `iq.imageName`       | The image name to use for the IQ Container, eg `sonatype/nexus-iq-server`  | `"registry.connect.redhat.com/sonatype/nexus-iq-server"`              |
+    | `iq.imageName`       | The image name to use for the IQ Container, eg `sonatype/nexus-iq-server`  | `"registry.connect.redhat.com/sonatype/nexus-iq-server:1.90.0"`              |
     | `iq.imagePullSecret` | The base-64 encoded secret to pull a container from Red Hat  | `""`              |
     | `iq.applicationPort` | Port of the application connector. Must match the value in the `configYaml` property | `8070`            |
     | `iq.adminPort`       | Port of the application connector. Must match the value in the `configYaml` property | `8071`            |

@@ -1,5 +1,5 @@
 channels:
-- currentCSV: nxiq-operator-certified.v1.90.0
+- currentCSV: nxiq-operator-certified.v1.90.0-1
   name: alpha
 defaultChannel: alpha
 packageName: nxiq-operator-certified
