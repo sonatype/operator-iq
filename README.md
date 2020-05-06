@@ -36,7 +36,7 @@ and push your operator image to quay.io to make it available for installation.
    your docker image.
    1. `[image-id]` can be collected from `docker images`
    2. `[image-name]` is `nxiq-operator-certified`
-   3. `[tag]` is the next version that's not already there, such as: `1.90.0-1`
+   3. `[tag]` is the operator version that's not already there in the form: `1.90.0-1`
 3. Package and upload metadata to Operator Config
    1. Create the bundle zip file: `./scripts/bundle.sh`
    2. Upload the zip to "Operator Config" of
