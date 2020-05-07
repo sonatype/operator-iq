@@ -1,6 +1,7 @@
 #!/bin/sh
 
 rm -rf bundle
+rm -f nxiq-operator-certified-metadata.zip
 
 mkdir bundle
 
