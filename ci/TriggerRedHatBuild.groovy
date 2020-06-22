@@ -13,7 +13,7 @@
 import groovyx.net.http.HttpBuilder
 import groovyx.net.http.HttpException
 
-if (args.size() < 3) {
+if (args.size() == 3) {
   System.err.println('Usage: groovy TriggerRedhatBuild.groovy <version> <projectId> <apiKey>')
   System.exit(1)
 }
