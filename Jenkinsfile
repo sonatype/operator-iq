@@ -42,8 +42,8 @@ node('ubuntu-zion') {
     }
   }
 
-  if ((! params.skip_red_hat_build) && (branch == 'master' || params.force_red_hat_build)) {
-    stage('Trigger Red Hat Certified Image Build') {
+  stage('Trigger Red Hat Certified Image Build') {
+    if ((! params.skip_red_hat_build) && (branch == 'master' || params.force_red_hat_build)) {
       withCredentials([
           string(credentialsId: 'operator-nxiq-rh-build-project-id', variable: 'PROJECT_ID'),
           string(credentialsId: 'rh-build-service-api-key', variable: 'API_KEY')]) {
