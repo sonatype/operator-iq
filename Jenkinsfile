@@ -15,7 +15,7 @@ properties([
 ])
 
 node('ubuntu-zion') {
-  def commitId, commitDate, version, branch
+  def commitId, commitDate, version, isMaster
   def organization = 'sonatype',
       gitHubRepository = 'operator-nxiq',
       credentialsId = 'integrations-github-api',
@@ -27,7 +27,8 @@ node('ubuntu-zion') {
 
     def checkoutDetails = checkout scm
 
-    branch = checkoutDetails.GIT_BRANCH == 'origin/master' ? 'master' : checkoutDetails.GIT_BRANCH
+    isMaster = checkoutDetails.GIT_BRANCH in ['origin/master', 'master']
+
     commitId = checkoutDetails.GIT_COMMIT
     commitDate = OsTools.runSafe(this, "git show -s --format=%cd --date=format:%Y%m%d-%H%M%S ${commitId}")
 
@@ -43,7 +44,7 @@ node('ubuntu-zion') {
   }
 
   stage('Trigger Red Hat Certified Image Build') {
-    if ((! params.skip_red_hat_build) && (branch == 'master' || params.force_red_hat_build)) {
+    if ((! params.skip_red_hat_build) && (isMaster || params.force_red_hat_build)) {
       withCredentials([
           string(credentialsId: 'operator-nxiq-rh-build-project-id', variable: 'PROJECT_ID'),
           string(credentialsId: 'rh-build-service-api-key', variable: 'API_KEY')]) {
