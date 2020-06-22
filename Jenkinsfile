@@ -89,5 +89,5 @@ def readVersion() {
       return line.split('=')[1].replaceAll(/[^\d.-]+/, '').trim()
     }
   }
-  error 'Could not determine version.'
+  error 'Could not determine version from build/Dockerfile.'
 }
