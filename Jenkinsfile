@@ -37,12 +37,10 @@ node('ubuntu-zion') {
 
       version = readVersion()
 
-      def apiToken
       withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: credentialsId,
                         usernameVariable: 'GITHUB_API_USERNAME', passwordVariable: 'GITHUB_API_PASSWORD']]) {
-        apiToken = env.GITHUB_API_PASSWORD
+        gitHub = new GitHub(this, "${organization}/${gitHubRepository}", env.GITHUB_API_PASSWORD)
       }
-      gitHub = new GitHub(this, "${organization}/${gitHubRepository}", apiToken)
     }
 
     if ((! params.skip_red_hat_build) && (branch == 'master' || params.force_red_hat_build)) {
