@@ -87,7 +87,7 @@ metadata:
       automatically enforces policy, and provides visibility throughout the entire SDLC.
     containerImage: registry.connect.redhat.com/sonatype/nxiq-operator-certified:1.94.0-1
     repository: https://github.com/sonatype/operator-iq
-    createdAt: 2020-05-01
+    createdAt: 2020-06-20
     support: Sonatype
     certified: "true"
   name: nxiq-operator-certified.v1.94.0-1
