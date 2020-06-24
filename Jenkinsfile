@@ -17,7 +17,6 @@ properties([
 node('ubuntu-zion') {
   def version, isMaster
   def organization = 'sonatype',
-      credentialsId = 'integrations-github-api',
       archiveName = 'nxiq-operator-certified-metadata.zip'
 
   stage('Preparation') {
