@@ -15,12 +15,10 @@ properties([
 ])
 
 node('ubuntu-zion') {
-  def commitId, commitDate, version, isMaster
+  def version, isMaster
   def organization = 'sonatype',
-      gitHubRepository = 'operator-nxiq',
       credentialsId = 'integrations-github-api',
       archiveName = 'nxiq-operator-certified-metadata.zip'
-  GitHub gitHub
 
   stage('Preparation') {
     deleteDir()
@@ -29,18 +27,10 @@ node('ubuntu-zion') {
 
     isMaster = checkoutDetails.GIT_BRANCH in ['origin/master', 'master']
 
-    commitId = checkoutDetails.GIT_COMMIT
-    commitDate = OsTools.runSafe(this, "git show -s --format=%cd --date=format:%Y%m%d-%H%M%S ${commitId}")
-
     OsTools.runSafe(this, 'git config --global user.email sonatype-ci@sonatype.com')
     OsTools.runSafe(this, 'git config --global user.name Sonatype CI')
 
     version = readVersion()
-
-    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: credentialsId,
-                      usernameVariable: 'GITHUB_API_USERNAME', passwordVariable: 'GITHUB_API_PASSWORD']]) {
-      gitHub = new GitHub(this, "${organization}/${gitHubRepository}", env.GITHUB_API_PASSWORD)
-    }
   }
 
   stage('Trigger Red Hat Certified Image Build') {
@@ -53,24 +43,8 @@ node('ubuntu-zion') {
     }
   }
 
-  if (currentBuild.result == 'FAILURE') {
-    return
-  }
-
   stage('Build') {
-    gitHub.statusUpdate commitId, 'pending', 'build', 'Build is running'
-
     OsTools.runSafe(this, 'scripts/bundle.sh')
-
-    if (currentBuild.result == 'FAILURE') {
-      gitHub.statusUpdate commitId, 'failure', 'build', 'Build failed'
-    } else {
-      gitHub.statusUpdate commitId, 'success', 'build', 'Build succeeded'
-    }
-  }
-
-  if (currentBuild.result == 'FAILURE') {
-    return
   }
 
   stage('Archive') {
