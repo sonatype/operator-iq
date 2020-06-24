@@ -27,9 +27,6 @@ node('ubuntu-zion') {
 
     isMaster = checkoutDetails.GIT_BRANCH in ['origin/master', 'master']
 
-    OsTools.runSafe(this, 'git config --global user.email sonatype-ci@sonatype.com')
-    OsTools.runSafe(this, 'git config --global user.name Sonatype CI')
-
     version = readVersion()
   }
 
