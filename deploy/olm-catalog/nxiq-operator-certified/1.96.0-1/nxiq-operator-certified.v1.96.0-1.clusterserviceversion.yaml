@@ -49,7 +49,7 @@ metadata:
                 },
                 "sonatypeWork": "/sonatype-work"
               },
-              "imageName": "registry.connect.redhat.com/sonatype/nexus-iq-server:1.95.0-ubi-2",
+              "imageName": "registry.connect.redhat.com/sonatype/nexus-iq-server:1.96.0-ubi-1",
               "imagePullPolicy": "IfNotPresent",
               "imagePullSecret": "",
               "licenseSecret": "",
@@ -85,12 +85,12 @@ metadata:
     description: |-
       Nexus Lifecycle is an open source governance platform that continuously identifies risk,
       automatically enforces policy, and provides visibility throughout the entire SDLC.
-    containerImage: registry.connect.redhat.com/sonatype/nxiq-operator-certified:1.95.0-1
+    containerImage: registry.connect.redhat.com/sonatype/nxiq-operator-certified:1.96.0-1
     repository: https://github.com/sonatype/operator-iq
     createdAt: 2020-07-20
     support: Sonatype
     certified: "true"
-  name: nxiq-operator-certified.v1.95.0-1
+  name: nxiq-operator-certified.v1.96.0-1
   namespace: placeholder
 spec:
   apiservicedefinitions: {}
@@ -238,8 +238,8 @@ spec:
                 - name: OPERATOR_NAME
                   value: nxiq-operator-certified
                 - name: RELATED_IMAGE_IQ
-                  value: registry.connect.redhat.com/sonatype/nexus-iq-server:1.95.0-ubi-2
-                image: registry.connect.redhat.com/sonatype/nxiq-operator-certified:1.95.0-1
+                  value: registry.connect.redhat.com/sonatype/nexus-iq-server:1.96.0-ubi-1
+                image: registry.connect.redhat.com/sonatype/nxiq-operator-certified:1.96.0-1
                 imagePullPolicy: Always
                 name: nxiq-operator-certified
                 resources: {}
@@ -365,5 +365,5 @@ spec:
   maturity: alpha
   provider:
     name: Sonatype
-  version: 1.95.0-1
+  version: 1.96.0-1
   replaces: nxiq-operator-certified.v1.94.0-4
