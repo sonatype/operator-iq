@@ -362,7 +362,7 @@ spec:
   maintainers:
   - email: support@sonaype.com
     name: Sonatype
-  maturity: alpha
+  maturity: stable
   provider:
     name: Sonatype
   version: 1.96.0-1
