@@ -1,3 +1,4 @@
+# {{templateWarning}}
 channels:
 - currentCSV: nxiq-operator-certified.v{{operatorVersion}}
   name: stable

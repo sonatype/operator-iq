@@ -10,14 +10,16 @@ operatorVersion=$1
 certAppVersion=$2
 
 shortVersion=$(echo $1 | sed 's/-.*//')
-replacedOperatorVersion=$(cat deploy/olm-catalog/nxiq-operator-certified/nxiq-operator-certified.package.yaml \
+replacedOperatorVersion=$(cat
+    deploy/olm-catalog/nxiq-operator-certified/nxiq-operator-certified.package.yaml \
     | grep currentCSV: | sed 's/.*v//')
 
 function applyTemplate {
     sed "s/{{shortVersion}}/${shortVersion}/g" \
     | sed "s/{{certAppVersion}}/${certAppVersion}/g" \
     | sed "s/{{operatorVersion}}/${operatorVersion}/g" \
-    | sed "s/{{replacedOperatorVersion}}/${replacedOperatorVersion}/g"
+    | sed "s/{{replacedOperatorVersion}}/${replacedOperatorVersion}/g" \
+    | sed "s/{{templateWarning}}/DO NOT MODIFY. This is produced by template./g"
 }
 
 cat scripts/templates/Chart.yaml \

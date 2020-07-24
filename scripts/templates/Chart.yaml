@@ -1,3 +1,4 @@
+# {{templateWarning}}
 apiVersion: v1
 appVersion: {{shortVersion}}
 description: Sonatype Nexus IQ Server continuously monitors your entire software supply
