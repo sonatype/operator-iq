@@ -1,15 +1,15 @@
 #!/bin/sh
 
-if [ $# != 3 ]; then
-    echo "Usage: $0 <shortVersion> <certAppVersion> <operatorVersion>"
-    echo "Ex: $0 1.90.0 1.90.0-ubi-1 1.90.0-1"
+if [ $# != 2 ]; then
+    echo "Usage: $0 <operatorVersion> <certAppVersion>"
+    echo "Ex: $0 1.90.0-1 1.90.0-ubi-1"
     exit 1
 fi
 
-shortVersion=$1
+operatorVersion=$1
 certAppVersion=$2
-operatorVersion=$3
 
+shortVersion=$(echo $1 | sed 's/-.*//')
 replacedOperatorVersion=$(cat deploy/olm-catalog/nxiq-operator-certified/nxiq-operator-certified.package.yaml \
     | grep currentCSV: | sed 's/.*v//')
 
