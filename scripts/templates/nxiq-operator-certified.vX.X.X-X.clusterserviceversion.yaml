@@ -49,7 +49,7 @@ metadata:
                 },
                 "sonatypeWork": "/sonatype-work"
               },
-              "imageName": "registry.connect.redhat.com/sonatype/nexus-iq-server:{{ubiVersion}}",
+              "imageName": "registry.connect.redhat.com/sonatype/nexus-iq-server:{{certAppVersion}}",
               "imagePullPolicy": "IfNotPresent",
               "imagePullSecret": "",
               "licenseSecret": "",
@@ -238,7 +238,7 @@ spec:
                 - name: OPERATOR_NAME
                   value: nxiq-operator-certified
                 - name: RELATED_IMAGE_IQ
-                  value: registry.connect.redhat.com/sonatype/nexus-iq-server:{{ubiVersion}}
+                  value: registry.connect.redhat.com/sonatype/nexus-iq-server:{{certAppVersion}}
                 image: registry.connect.redhat.com/sonatype/nxiq-operator-certified:{{operatorVersion}}
                 imagePullPolicy: Always
                 name: nxiq-operator-certified
@@ -366,4 +366,4 @@ spec:
   provider:
     name: Sonatype
   version: {{operatorVersion}}
-  replaces: nxiq-operator-certified.v{{oldOperatorVersion}}
+  replaces: nxiq-operator-certified.v{{replacedOperatorVersion}}

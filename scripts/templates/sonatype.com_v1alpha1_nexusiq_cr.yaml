@@ -31,7 +31,7 @@ spec:
         - port: 8070
           type: http
       sonatypeWork: /sonatype-work
-    imageName: registry.connect.redhat.com/sonatype/nexus-iq-server:{{ubiVersion}}
+    imageName: registry.connect.redhat.com/sonatype/nexus-iq-server:{{certAppVersion}}
     imagePullPolicy: IfNotPresent
     imagePullSecret: ""
     licenseSecret: ""

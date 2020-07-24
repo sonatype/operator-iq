@@ -30,4 +30,4 @@ spec:
             - name: OPERATOR_NAME
               value: "nxiq-operator-certified"
             - name: RELATED_IMAGE_IQ
-              value: registry.connect.redhat.com/sonatype/nexus-iq-server:{{ubiVersion}}
+              value: registry.connect.redhat.com/sonatype/nexus-iq-server:{{certAppVersion}}

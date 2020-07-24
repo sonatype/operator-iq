@@ -4,7 +4,7 @@
 
 iq:
   name: nxiq
-  imageName: registry.connect.redhat.com/sonatype/nexus-iq-server:{{ubiVersion}}
+  imageName: registry.connect.redhat.com/sonatype/nexus-iq-server:{{certAppVersion}}
   imagePullPolicy: IfNotPresent
   imagePullSecret: ""
   applicationPort: 8070
