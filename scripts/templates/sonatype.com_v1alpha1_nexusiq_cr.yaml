@@ -1,0 +1,55 @@
+apiVersion: sonatype.com/v1alpha1
+kind: NexusIQ
+metadata:
+  name: example-nexusiq
+spec:
+  # Default values copied from <project_dir>/helm-charts/iqserver/values.yaml
+  
+  deployment:
+    postStart:
+      command: null
+    preStart:
+      command: null
+  fullnameOverride: ""
+  imagePullSecrets: []
+  ingress:
+    annotations: {}
+    enabled: false
+    hosts: []
+    path: /
+    tls: []
+  iq:
+    adminPort: 8071
+    applicationPort: 8070
+    configYaml:
+      createSampleData: true
+      server:
+        adminConnectors:
+        - port: 8071
+          type: http
+        applicationConnectors:
+        - port: 8070
+          type: http
+      sonatypeWork: /sonatype-work
+    imageName: registry.connect.redhat.com/sonatype/nexus-iq-server:{{ubiVersion}}
+    imagePullPolicy: IfNotPresent
+    imagePullSecret: ""
+    licenseSecret: ""
+    memory: 1Gi
+    name: nxiq
+  nameOverride: ""
+  persistence:
+    accessMode: ReadWriteOnce
+    storageSize: 1Gi
+  service:
+    annotations: {}
+    enabled: false
+    labels: {}
+    ports:
+    - name: nexus-service
+      port: 80
+      targetPort: 80
+  serviceAccount:
+    create: true
+    name: null
+  
