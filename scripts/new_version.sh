@@ -10,7 +10,7 @@ operatorVersion=$1
 certAppVersion=$2
 
 shortVersion=$(echo $1 | sed 's/-.*//')
-replacedOperatorVersion=$(cat
+replacedOperatorVersion=$(cat \
     deploy/olm-catalog/nxiq-operator-certified/nxiq-operator-certified.package.yaml \
     | grep currentCSV: | sed 's/.*v//')
 
