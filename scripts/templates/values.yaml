@@ -1,0 +1,91 @@
+# {{templateWarning}}
+# Default values for iqserver.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+iq:
+  name: nxiq
+  imageName: registry.connect.redhat.com/sonatype/nexus-iq-server:{{certAppVersion}}
+  imagePullPolicy: IfNotPresent
+  imagePullSecret: ""
+  applicationPort: 8070
+  adminPort: 8071
+  memory: 1Gi
+  # base 64 encoded license file with no line breaks
+  licenseSecret: ""
+  # configYaml is the full text of the config.yml file that will be passed to IQ Server
+  configYaml:
+    server:
+      applicationConnectors:
+        - type: http
+          port: 8070
+      adminConnectors:
+        - type: http
+          port: 8071
+    createSampleData: true
+    sonatypeWork: /sonatype-work
+    # add this line with this file path and the `licenseSecret` above to autoconfigure licensing
+    # licenseFile: /etc/nexus-iq-license/license_lic
+
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name:
+
+deployment:
+  # Uncomment and modify this to run a command before starting the IQ Server
+  preStart:
+    command:    # '["/bin/rm", "-f", "/path/to/lockfile"]'
+  # Uncomment and modify this to run a command after starting the IQ Server
+  postStart:
+    command:    # '["/bin/sh", "-c", "ls"]'
+
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  path: /
+  hosts: []
+    # - nexus.local
+  tls: []
+    # - secretName: nexus-local-tls
+    #   hosts:
+    #     - nexus.local
+    #     - nexus-docker.local
+    #     - nexus-docker-hosted.local
+
+# # To use an additional service, set enable to true
+service:
+  # name: additional-svc
+  enabled: false
+  labels: {}
+  annotations: {}
+  ports:
+  - name: nexus-service
+    targetPort: 80
+    port: 80
+
+persistence:
+  accessMode: ReadWriteOnce
+  ## If defined, storageClass: <storageClass>
+  ## If set to "-", storageClass: "", which disables dynamic provisioning
+  ## If undefined (the default) or set to null, no storageClass spec is
+  ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+  ##   GKE, AWS & OpenStack)
+  # storageClass: "-"
+  storageSize: 1Gi
+  # existingClaim:
+  # annotations:
+  #  "helm.sh/resource-policy": keep
+  ## Configure the volume type.
+  # volumeConfiguration:
+  #   hostPath:
+  #     path: /data/nxiq/

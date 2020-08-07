@@ -1,0 +1,6 @@
+# {{templateWarning}}
+channels:
+- currentCSV: nxiq-operator-certified.v{{operatorVersion}}
+  name: stable
+defaultChannel: stable
+packageName: nxiq-operator-certified
