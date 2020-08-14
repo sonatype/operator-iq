@@ -1,4 +1,3 @@
-# DO NOT MODIFY. This is produced by template.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,7 +16,7 @@ spec:
       containers:
         - name: nxiq-operator-certified
           # Replace this with the built image name
-          image: registry.connect.redhat.com/sonatype/nxiq-operator-certified:1.97.0-1
+          image: registry.connect.redhat.com/sonatype/nxiq-operator-certified:1.96.0-1
           imagePullPolicy: Always
           env:
             - name: WATCH_NAMESPACE
@@ -31,4 +30,4 @@ spec:
             - name: OPERATOR_NAME
               value: "nxiq-operator-certified"
             - name: RELATED_IMAGE_IQ
-              value: registry.connect.redhat.com/sonatype/nexus-iq-server:1.97.0-ubi-1
+              value: registry.connect.redhat.com/sonatype/nexus-iq-server:1.96.0-ubi-1

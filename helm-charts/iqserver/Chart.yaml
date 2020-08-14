@@ -1,6 +1,5 @@
-# DO NOT MODIFY. This is produced by template.
 apiVersion: v1
-appVersion: 1.97.0
+appVersion: 1.96.0
 description: Sonatype Nexus IQ Server continuously monitors your entire software supply
   chain
 home: https://www.sonatype.com/nexus-iq-server

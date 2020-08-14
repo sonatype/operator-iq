@@ -1,4 +1,3 @@
-# DO NOT MODIFY. This is produced by template.
 apiVersion: sonatype.com/v1alpha1
 kind: NexusIQ
 metadata:
@@ -32,7 +31,7 @@ spec:
         - port: 8070
           type: http
       sonatypeWork: /sonatype-work
-    imageName: registry.connect.redhat.com/sonatype/nexus-iq-server:1.97.0-ubi-1
+    imageName: registry.connect.redhat.com/sonatype/nexus-iq-server:1.96.0-ubi-1
     imagePullPolicy: IfNotPresent
     imagePullSecret: ""
     licenseSecret: ""
