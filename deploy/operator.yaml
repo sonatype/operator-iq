@@ -17,7 +17,7 @@ spec:
       containers:
         - name: nxiq-operator-certified
           # Replace this with the built image name
-          image: registry.connect.redhat.com/sonatype/nxiq-operator-certified:1.97.0-4
+          image: registry.connect.redhat.com/sonatype/nxiq-operator-certified:1.98.0-1
           imagePullPolicy: Always
           env:
             - name: WATCH_NAMESPACE
@@ -31,4 +31,4 @@ spec:
             - name: OPERATOR_NAME
               value: "nxiq-operator-certified"
             - name: RELATED_IMAGE_IQ
-              value: registry.connect.redhat.com/sonatype/nexus-iq-server:1.97.0-ubi-1
+              value: registry.connect.redhat.com/sonatype/nexus-iq-server:1.98.0-ubi-1
