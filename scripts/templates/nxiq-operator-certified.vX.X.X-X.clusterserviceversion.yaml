@@ -141,8 +141,8 @@ spec:
     Once the server instance is created by the operator and running,
     you'll want to expose the service as you see fit:
     1. Create a Route to the new service for iq.applicationPort (8070).
-    2. Visit the URL provided by the Route, and login with the default credentials:
-      `admin`/`admin123`
+    2. Visit the URL provided by the Route, login, and set new credentials.
+      The default credentials are `admin`/`admin123`.
 
     The Nexus IQ Server can be further configured via the NexusIQ custom resource definition:
 
