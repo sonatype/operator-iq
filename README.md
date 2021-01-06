@@ -21,6 +21,7 @@ and push your operator image to quay.io to make it available for installation.
 8. Expose the new IQ Server outside the cluster: 
    2. Create a Route in OpenShift UI to the new service, port 8070.
 9. Visit the new URL shown on the Route page in OpenShift UI.
+10. Default credentials are admin/admin123.
   
 ## Uninstall Nexus IQ from a Local Test Cluster
 
