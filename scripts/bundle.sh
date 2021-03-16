@@ -1,16 +1,67 @@
 #!/bin/sh
 
-rm -rf bundle
-rm -f nxiq-operator-certified-metadata.zip
+# built from https://redhat-connect.gitbook.io/partner-guide-for-red-hat-openshift-and-container/certify-your-operator/upgrading-your-operator
 
+if [ $# != 3 ]; then
+    cat <<EOF
+Usage: $0 <bundleNumber> <projectId> <apiKey>
+    bundleNumber: appended to version to allow rebuilds, usually 1
+    projectId: project id from Red Hat bundle project
+    apiKey: api key from Red Hat bundle project
+EOF
+
+    exit 1
+fi
+
+bundleNumber=$1
+projectId=$2
+apiKey=$3
+
+set -e
+
+# stage a clean bundle directory
+rm -rf bundle
 mkdir bundle
 
-CSVS=$(find deploy/olm-catalog -name '*.clusterserviceversion.yaml')
+# copy the crd
+cp -v deploy/crds/sonatype.com_nexusiqs_crd.yaml bundle
 
-cp -v $CSVS bundle
-cp -v deploy/olm-catalog/nxiq-operator-certified/nxiq-operator-certified.package.yaml bundle
-cp -v deploy/crds/sonatype.com_nexusiqs_crd.yaml bundle/nxiq-operator-certified.crd.yaml
+# copy every version of the csv and the package yaml
+cp -rv deploy/olm-catalog/nxiq-operator-certified/* bundle
 
-(cd bundle; zip -rv ../nxiq-operator-certified-metadata.zip .)
+# distribute crd into each version directory
+for d in $(find bundle/* -type d); do
+    cp -v deploy/crds/sonatype.com_nexusiqs_crd.yaml ${d}
+done
 
-rm -rf bundle
+# restructure and generate docker file for the bundle
+
+cd bundle;
+
+latest_version=$(cat nxiq-operator-certified.package.yaml \
+                     | grep currentCSV: \
+                     | sed 's/.*nxiq-operator-certified.v//')
+
+opm alpha bundle generate -d $latest_version -u $latest_version
+mv bundle.Dockerfile bundle-$latest_version.Dockerfile
+
+# append more labels
+cat >> bundle-$latest_version.Dockerfile <<EOF
+LABEL com.redhat.openshift.versions="v4.5,v4.6"
+LABEL com.redhat.delivery.backport=true
+LABEL com.redhat.delivery.operator.bundle=true
+EOF
+
+# build the bundle docker image
+docker build . \
+       -f bundle-$latest_version.Dockerfile \
+       -t nxiq-operator-bundle:$latest_version
+
+docker tag \
+       nxiq-operator-bundle:$latest_version \
+       scan.connect.redhat.com/${projectId}/nxiq-operator-bundle:${latest_version}-${bundleNumber}
+
+# push to red hat scan service
+echo $apiKey | docker login -u unused --password-stdin scan.connect.redhat.com
+docker push \
+       scan.connect.redhat.com/${projectId}/nxiq-operator-bundle:${latest_version}-${bundleNumber}
