@@ -367,4 +367,4 @@ spec:
   provider:
     name: Sonatype
   version: 1.100.0-2
-  replaces: nxiq-operator-certified.v1.100.0-1
+  replaces: nxiq-operator-certified.v1.99.0-1
