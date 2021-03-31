@@ -41,11 +41,11 @@ node('ubuntu-zion') {
   }
 
   stage('Build') {
-    //OsTools.runSafe(this, 'scripts/bundle.sh')
+    // OsTools.runSafe(this, 'scripts/bundle.sh')
   }
 
   stage('Archive') {
-      archiveArtifacts artifacts: archiveName, onlyIfSuccessful: true
+    // archiveArtifacts artifacts: archiveName, onlyIfSuccessful: true
   }
 }
 
