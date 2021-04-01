@@ -13,6 +13,7 @@ USER root
 RUN microdnf install yum
 RUN yum -y update-minimal --security --sec-severity=Important --sec-severity=Critical
 RUN microdnf remove yum && microdnf clean all
+USER ${USER_UID}
 
 # Required Licenses
 COPY licenses /licenses
