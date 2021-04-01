@@ -9,6 +9,11 @@ LABEL name="Nexus IQ Server Operator" \
       summary="Nexus IQ Server is a policy engine powered by precise intelligence on open source components." \
       description="Nexus IQ Server is a policy engine powered by precise intelligence on open source components."
 
+USER root
+RUN microdnf install yum
+RUN yum -y update-minimal --security --sec-severity=Important --sec-severity=Critical
+RUN microdnf remove yum && microdnf clean all
+
 # Required Licenses
 COPY licenses /licenses
 
