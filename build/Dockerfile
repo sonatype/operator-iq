@@ -1,6 +1,5 @@
 # DO NOT MODIFY. This is produced by template.
-FROM quay.io/operator-framework/helm-operator:v0.17.0
-
+FROM quay.io/operator-framework/helm-operator:v1.5.0
 
 # Required OpenShift Labels
 LABEL name="Nexus IQ Server Operator" \
