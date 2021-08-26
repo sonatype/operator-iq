@@ -369,4 +369,4 @@ spec:
   provider:
     name: Sonatype
   version: 1.121.0-1
-  replaces: nxiq-operator-certified.v1.108.0-8
+  replaces: nxiq-operator-certified.v1.99.0-1
