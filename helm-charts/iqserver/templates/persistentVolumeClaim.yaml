@@ -1,7 +1,30 @@
-kind: PersistentVolumeClaim
 apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
   name: {{ template "iqserver.fullname" . }}-data
+  labels:
+  {{- if .Values.persistence.annotations }}
+annotations:
+  {{ toYaml .Values.persistence.annotations | indent 4 }}
+  {{- end }}
+spec:
+  {{- if .Values.persistence.storageClass }}
+  {{- if (eq "-" .Values.persistence.storageClass) }}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: "{{ .Values.persistence.storageClass }}"
+  {{- end }}
+  {{- end }}
+  accessModes:
+    - {{ .Values.persistence.accessMode | quote }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.storageSize | quote }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ template "iqserver.fullname" . }}-log
   labels:
   {{- if .Values.persistence.annotations }}
 annotations:
