@@ -197,6 +197,10 @@ spec:
     ```yaml
     iq:
       configYaml:
+        sonatypeWork: /sonatype-work
+        createSampleData: true
+        # add this line and the `licenseSecret` above to autoconfigure licensing
+        licenseFile: /etc/nexus-iq-license/license_lic
         server:
           applicationConnectors:
             - type: http
@@ -204,10 +208,6 @@ spec:
           adminConnectors:
             - type: http
               port: 8071
-        createSampleData: true
-        sonatypeWork: /sonatype-work
-        # add this line and the `licenseSecret` above to autoconfigure licensing
-        licenseFile: /etc/nexus-iq-license/license_lic
     ```
   displayName: Nexus IQ Operator
   icon:
