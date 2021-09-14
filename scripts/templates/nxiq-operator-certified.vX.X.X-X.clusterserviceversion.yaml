@@ -101,7 +101,7 @@ metadata:
                       "logFormat": "%d{'yyyy-MM-dd HH:mm:ss,SSSZ'} %level [%thread] %X{username} %logger - %msg%n",
                       "currentLogFilename": "/var/log/nexus-iq-server/clm-server.log",
                       "archivedLogFilenamePattern": "/var/log/nexus-iq-server/clm-server-%d.log.gz",
-                      "archivedFileCount": 50,
+                      "archivedFileCount": 50
                     }
                   ]
                 }
