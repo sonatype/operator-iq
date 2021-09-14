@@ -23,15 +23,82 @@ spec:
     adminPort: 8071
     applicationPort: 8070
     configYaml:
+      sonatypeWork: /sonatype-work
       createSampleData: true
       server:
-        adminConnectors:
-        - port: 8071
-          type: http
         applicationConnectors:
-        - port: 8070
-          type: http
-      sonatypeWork: /sonatype-work
+          - port: 8070
+            type: http
+        adminConnectors:
+          - port: 8071
+            type: http
+        requestLog:
+          appenders:
+            - type: file
+              currentLogFilename: /var/log/nexus-iq-server/request.log
+              logFormat: "%clientHost %l %user [%date] \"%requestURL\" %statusCode %bytesSent %elapsedTime \"%header{User-Agent}\""
+              archivedLogFilenamePattern: /var/log/nexus-iq-server/request-%d.log.gz
+              archivedFileCount: 50
+      logging:
+        level: DEBUG
+        loggers:
+          "com.sonatype.insight.scan": INFO
+          "eu.medsea.mimeutil.MimeUtil2": INFO
+          "org.apache.http": INFO
+          "org.apache.http.wire": ERROR
+          "org.eclipse.birt.report.engine.layout.pdf.font.FontConfigReader": WARN
+          "org.eclipse.jetty": INFO
+          "org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter": INFO
+          "com.sonatype.insight.audit":
+            appenders:
+              - type: file
+                currentLogFilename: /var/log/nexus-iq-server/audit.log
+                archivedLogFilenamePattern: /var/log/nexus-iq-server/audit-%d.log.gz
+                archivedFileCount: 50
+          "com.sonatype.insight.policy.violation":
+            appenders:
+              - type: console
+                threshold: INFO
+        appenders:
+          - type: console
+            threshold: INFO
+            logFormat: "%d{'yyyy-MM-dd HH:mm:ss,SSSZ'} %level [%thread] %X{username} %logger - %msg%n"
+          - type: file
+            threshold: ALL
+            logFormat: "%d{'yyyy-MM-dd HH:mm:ss,SSSZ'} %level [%thread] %X{username} %logger - %msg%n"
+            currentLogFilename: /var/log/nexus-iq-server/clm-server.log
+            archivedLogFilenamePattern: /var/log/nexus-iq-server/clm-server-%d.log.gz
+            archivedFileCount: 50
+      logging:
+        level: DEBUG
+        loggers:
+          "com.sonatype.insight.scan": INFO
+          "eu.medsea.mimeutil.MimeUtil2": INFO
+          "org.apache.http": INFO
+          "org.apache.http.wire": ERROR
+          "org.eclipse.birt.report.engine.layout.pdf.font.FontConfigReader": WARN
+          "org.eclipse.jetty": INFO
+          "org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter": INFO
+          "com.sonatype.insight.audit":
+            appenders:
+              - type: file
+                currentLogFilename: /var/log/nexus-iq-server/audit.log
+                archivedLogFilenamePattern: /var/log/nexus-iq-server/audit-%d.log.gz
+                archivedFileCount: 50
+          "com.sonatype.insight.policy.violation":
+            appenders:
+              - type: console
+                threshold: INFO
+        appenders:
+          - type: console
+            threshold: INFO
+            logFormat: "%d{'yyyy-MM-dd HH:mm:ss,SSSZ'} %level [%thread] %X{username} %logger - %msg%n"
+          - type: file
+            threshold: ALL
+            logFormat: "%d{'yyyy-MM-dd HH:mm:ss,SSSZ'} %level [%thread] %X{username} %logger - %msg%n"
+            currentLogFilename: /var/log/nexus-iq-server/clm-server.log
+            archivedLogFilenamePattern: /var/log/nexus-iq-server/clm-server-%d.log.gz
+            archivedFileCount: 50
     imageName: registry.connect.redhat.com/sonatype/nexus-iq-server:{{certAppVersion}}
     imagePullPolicy: IfNotPresent
     imagePullSecret: ""
