@@ -191,6 +191,9 @@ spec:
     * Chrome Browser Extension
     * Red Hat Clair for Container Scanning
 
+    ## Limitations
+      
+    This operator will be released on a quarterly basis.
 
     ## Usage
 
