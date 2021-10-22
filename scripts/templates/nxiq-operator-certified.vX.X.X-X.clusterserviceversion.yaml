@@ -147,6 +147,7 @@ metadata:
     createdAt: 2020-07-20
     support: Sonatype
     certified: "true"
+    olm.skipRange: "<{{operatorVersion}}"
   name: nxiq-operator-certified.v{{operatorVersion}}
   namespace: placeholder
 spec:
@@ -425,4 +426,3 @@ spec:
   provider:
     name: Sonatype
   version: {{operatorVersion}}
-  replaces: nxiq-operator-certified.v{{replacedOperatorVersion}}
