@@ -28,4 +28,4 @@ N/A
 
 ## Local Development
 
-See the [REAME.md](README.md) file
+See the [README.md](README.md) file
