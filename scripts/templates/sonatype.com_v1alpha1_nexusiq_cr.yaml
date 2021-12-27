@@ -99,7 +99,7 @@ spec:
             currentLogFilename: /var/log/nexus-iq-server/clm-server.log
             archivedLogFilenamePattern: /var/log/nexus-iq-server/clm-server-%d.log.gz
             archivedFileCount: 50
-    imageName: registry.connect.redhat.com/sonatype/nexus-iq-server:{{certAppVersion}}
+    imageName: {{certAppSHA}}
     imagePullPolicy: IfNotPresent
     imagePullSecret: ""
     licenseSecret: ""

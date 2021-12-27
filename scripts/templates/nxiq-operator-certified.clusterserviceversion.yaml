@@ -106,7 +106,7 @@ metadata:
                   ]
                 }
               },
-              "imageName": "registry.connect.redhat.com/sonatype/nexus-iq-server:{{certAppVersion}}",
+              "imageName": "{{certAppSHA}}",
               "imagePullPolicy": "IfNotPresent",
               "imagePullSecret": "",
               "licenseSecret": "",
@@ -142,7 +142,7 @@ metadata:
     description: |-
       Nexus Lifecycle is an open source governance platform that continuously identifies risk,
       automatically enforces policy, and provides visibility throughout the entire SDLC.
-    containerImage: registry.connect.redhat.com/sonatype/nxiq-operator-certified:{{operatorVersion}}
+    containerImage: {{operatorSHA}}
     repository: https://github.com/sonatype/operator-iq
     createdAt: 2020-07-20
     support: Sonatype
@@ -301,8 +301,8 @@ spec:
                 - name: OPERATOR_NAME
                   value: nxiq-operator-certified
                 - name: RELATED_IMAGE_IQ
-                  value: registry.connect.redhat.com/sonatype/nexus-iq-server:{{certAppVersion}}
-                image: registry.connect.redhat.com/sonatype/nxiq-operator-certified:{{operatorVersion}}
+                  value: {{certAppSHA}}
+                image: {{operatorSHA}}
                 imagePullPolicy: Always
                 name: nxiq-operator-certified
                 resources: {}

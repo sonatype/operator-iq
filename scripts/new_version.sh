@@ -1,49 +1,87 @@
 #!/bin/sh
 
-if [ $# != 2 ]; then
-    echo "Usage: $0 <operatorVersion> <certAppVersion>"
-    echo "Ex: $0 1.90.0-1 1.90.0-ubi-1"
+if [ $# -lt 1 ]; then
+    echo "Usage: $0 image <operatorVersion> <certAppVersion>"
+    echo "Usage: $0 bundle <operatorVersion> <operatorImageSHA> <certAppImageSHA>"
+    echo "Ex: $0 image 1.131.0-1 1.131.0-ubi-1"
+    echo "Ex: $0 bundle 1.131.0-1 registry...@sha256:ab12... registry...@sha256:ab12..."
     exit 1
 fi
 
-operatorVersion=$1
-certAppVersion=$2
+stage=$1
 
-shortVersion=$(echo $1 | sed 's/-.*//')
-replacedOperatorVersion=$(cat \
-    deploy/olm-catalog/nxiq-operator-certified/nxiq-operator-certified.package.yaml \
-    | grep currentCSV: | sed 's/.*v//')
+shortVersion=$(echo $2 | sed 's/-.*//')
 
-function applyTemplate {
-    sed "s/{{shortVersion}}/${shortVersion}/g" \
-    | sed "s/{{certAppVersion}}/${certAppVersion}/g" \
-    | sed "s/{{operatorVersion}}/${operatorVersion}/g" \
-    | sed "s/{{replacedOperatorVersion}}/${replacedOperatorVersion}/g" \
-    | sed "s/{{templateWarning}}/DO NOT MODIFY. This is produced by template./g"
-}
+if [ "$1" = "image" ]; then
+    if [ $# -ne 3 ]; then
+        echo "Usage: $0 image <operatorVersion> <certAppVersion>"
+        echo "Ex: $0 image 1.131.0-1 1.131.0-ubi-1"
+        exit 1
+    fi
 
-cat scripts/templates/Chart.yaml \
-    | applyTemplate > helm-charts/iqserver/Chart.yaml
+    operatorVersion=$2
+    certAppVersion=$3
 
-cat scripts/templates/Dockerfile \
-    | applyTemplate > build/Dockerfile
+    function applyTemplate {
+        sed "s!{{shortVersion}}!${shortVersion}!g" \
+        | sed "s!{{certAppVersion}}!${certAppVersion}!g" \
+        | sed "s!{{operatorVersion}}!${operatorVersion}!g" \
+        | sed "s!{{templateWarning}}!DO NOT MODIFY. This is produced by template.!g"
+    }
 
-cat scripts/templates/nxiq-operator-certified.package.yaml \
-    | applyTemplate \
-    > deploy/olm-catalog/nxiq-operator-certified/nxiq-operator-certified.package.yaml
+    cat scripts/templates/Chart.yaml \
+        | applyTemplate > helm-charts/iqserver/Chart.yaml
 
-if [ ! -d "deploy/olm-catalog/nxiq-operator-certified/${operatorVersion}" ]; then
-    mkdir "deploy/olm-catalog/nxiq-operator-certified/${operatorVersion}"
+    cat scripts/templates/values.yaml \
+        | applyTemplate > helm-charts/iqserver/values.yaml
+
+    cat scripts/templates/Dockerfile \
+        | applyTemplate > build/Dockerfile
 fi
 
-cat scripts/templates/nxiq-operator-certified.vX.X.X-X.clusterserviceversion.yaml \
-    | applyTemplate \
-    > "deploy/olm-catalog/nxiq-operator-certified/${operatorVersion}/nxiq-operator-certified.v${operatorVersion}.clusterserviceversion.yaml"
+if [ "$1" = "bundle" ]; then
+    if [ $# -ne 4 ]; then
+        echo "Usage: $0 bundle <operatorVersion> <operatorImageSHA> <certAppImageSHA>"
+        echo "Ex: $0 bundle 1.131.0-1 registry...@sha256:ab12... registry...@sha256:ab12..."
+        exit 1
+    fi
 
-cat scripts/templates/operator.yaml | applyTemplate > deploy/operator.yaml
+    operatorVersion=$2
+    operatorSHA=$3
+    certAppSHA=$4
 
-cat scripts/templates/sonatype.com_v1alpha1_nexusiq_cr.yaml \
-    | applyTemplate > deploy/crds/sonatype.com_v1alpha1_nexusiq_cr.yaml
+    function applyTemplate {
+        sed "s!{{shortVersion}}!${shortVersion}!g" \
+        | sed "s!{{certAppSHA}}!${certAppSHA}!g" \
+        | sed "s!{{operatorSHA}}!${operatorSHA}!g" \
+        | sed "s!{{operatorVersion}}!${operatorVersion}!g" \
+        | sed "s!{{templateWarning}}!DO NOT MODIFY. This is produced by template.!g"
+    }
 
-cat scripts/templates/values.yaml \
-    | applyTemplate > helm-charts/iqserver/values.yaml
+    cat scripts/templates/nxiq-operator-certified.package.yaml \
+        | applyTemplate \
+        > deploy/olm-catalog/nxiq-operator-certified/nxiq-operator-certified.package.yaml
+
+    [ ! -d "deploy/olm-catalog/nxiq-operator-certified/${operatorVersion}/manifests" ] \
+        && mkdir -p "deploy/olm-catalog/nxiq-operator-certified/${operatorVersion}/manifests"
+
+    [ ! -d "deploy/olm-catalog/nxiq-operator-certified/${operatorVersion}/metadata" ] \
+        && mkdir -p "deploy/olm-catalog/nxiq-operator-certified/${operatorVersion}/metadata"
+
+    cat scripts/templates/annotations.yaml \
+        | applyTemplate \
+        > "deploy/olm-catalog/nxiq-operator-certified/${operatorVersion}/metadata/annotations.yaml"
+
+    cat scripts/templates/nxiq-operator-certified.clusterserviceversion.yaml \
+        | applyTemplate \
+        > "deploy/olm-catalog/nxiq-operator-certified/${operatorVersion}/manifests/nxiq-operator-certified.clusterserviceversion.yaml"
+
+    cat scripts/templates/sonatype.com_nexusiqs_crd.yaml \
+        | applyTemplate \
+        > "deploy/olm-catalog/nxiq-operator-certified/${operatorVersion}/manifests/sonatype.com_nexusiqs_crd.yaml"
+
+    cat scripts/templates/operator.yaml | applyTemplate > deploy/operator.yaml
+
+    cat scripts/templates/sonatype.com_v1alpha1_nexusiq_cr.yaml \
+        | applyTemplate > deploy/crds/sonatype.com_v1alpha1_nexusiq_cr.yaml
+fi
