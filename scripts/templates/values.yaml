@@ -2,7 +2,7 @@
 # Default values for iqserver.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-
+---
 iq:
   name: nxiq
   imageName: registry.connect.redhat.com/sonatype/nexus-iq-server:{{certAppVersion}}
@@ -28,7 +28,7 @@ iq:
           port: 8071
       requestLog:
         appenders:
-          #All appenders set to console
+          # All appenders set to console
           - type: file
             currentLogFilename: /var/log/nexus-iq-server/request.log
             # Do not display log statements below this threshold to stdout.
@@ -47,10 +47,11 @@ iq:
         "org.apache.http.wire": ERROR
         "org.eclipse.birt.report.engine.layout.pdf.font.FontConfigReader": WARN
         "org.eclipse.jetty": INFO
-        "org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter": INFO # WARNING: This reveals credentials at DEBUG level
+        # WARNING: This reveals credentials at DEBUG level
+        "org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter": INFO
         "com.sonatype.insight.audit":
           appenders:
-            #All appenders set to console
+            # All appenders set to console
             - type: file
               currentLogFilename: /var/log/nexus-iq-server/audit.log
               # Do not display log statements below this threshold to stdout.
@@ -100,28 +101,28 @@ deployment:
 ingress:
   enabled: false
   annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+  #  kubernetes.io/ingress.class: nginx
+  #  kubernetes.io/tls-acme: "true"
   path: /
   hosts: []
-    # - nexus.local
+  #  - nexus.local
   tls: []
-    # - secretName: nexus-local-tls
-    #   hosts:
-    #     - nexus.local
-    #     - nexus-docker.local
-    #     - nexus-docker-hosted.local
+  #  - secretName: nexus-local-tls
+  #    hosts:
+  #      - nexus.local
+  #      - nexus-docker.local
+  #      - nexus-docker-hosted.local
 
-# # To use an additional service, set enable to true
+# To use an additional service, set enable to true
 service:
   # name: additional-svc
   enabled: false
   labels: {}
   annotations: {}
   ports:
-  - name: nexus-service
-    targetPort: 80
-    port: 80
+    - name: nexus-service
+      targetPort: 80
+      port: 80
 
 persistence:
   accessMode: ReadWriteOnce
