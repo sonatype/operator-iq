@@ -1,4 +1,5 @@
 # {{templateWarning}}
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,7 +18,7 @@ spec:
       containers:
         - name: nxiq-operator-certified
           # Replace this with the built image name
-          image: registry.connect.redhat.com/sonatype/nxiq-operator-certified:{{operatorVersion}}
+          image: {{operatorSHA}}
           imagePullPolicy: Always
           env:
             - name: WATCH_NAMESPACE
@@ -31,4 +32,4 @@ spec:
             - name: OPERATOR_NAME
               value: "nxiq-operator-certified"
             - name: RELATED_IMAGE_IQ
-              value: registry.connect.redhat.com/sonatype/nexus-iq-server:{{certAppVersion}}
+              value: {{certAppSHA}}
