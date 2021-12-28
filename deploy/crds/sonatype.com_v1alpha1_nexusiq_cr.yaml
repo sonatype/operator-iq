@@ -1,11 +1,12 @@
 # DO NOT MODIFY. This is produced by template.
+---
 apiVersion: sonatype.com/v1alpha1
 kind: NexusIQ
 metadata:
   name: example-nexusiq
 spec:
   # Default values copied from <project_dir>/helm-charts/iqserver/values.yaml
-  
+
   deployment:
     postStart:
       command: null
@@ -69,37 +70,7 @@ spec:
             currentLogFilename: /var/log/nexus-iq-server/clm-server.log
             archivedLogFilenamePattern: /var/log/nexus-iq-server/clm-server-%d.log.gz
             archivedFileCount: 50
-      logging:
-        level: DEBUG
-        loggers:
-          "com.sonatype.insight.scan": INFO
-          "eu.medsea.mimeutil.MimeUtil2": INFO
-          "org.apache.http": INFO
-          "org.apache.http.wire": ERROR
-          "org.eclipse.birt.report.engine.layout.pdf.font.FontConfigReader": WARN
-          "org.eclipse.jetty": INFO
-          "org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter": INFO
-          "com.sonatype.insight.audit":
-            appenders:
-              - type: file
-                currentLogFilename: /var/log/nexus-iq-server/audit.log
-                archivedLogFilenamePattern: /var/log/nexus-iq-server/audit-%d.log.gz
-                archivedFileCount: 50
-          "com.sonatype.insight.policy.violation":
-            appenders:
-              - type: console
-                threshold: INFO
-        appenders:
-          - type: console
-            threshold: INFO
-            logFormat: "%d{'yyyy-MM-dd HH:mm:ss,SSSZ'} %level [%thread] %X{username} %logger - %msg%n"
-          - type: file
-            threshold: ALL
-            logFormat: "%d{'yyyy-MM-dd HH:mm:ss,SSSZ'} %level [%thread] %X{username} %logger - %msg%n"
-            currentLogFilename: /var/log/nexus-iq-server/clm-server.log
-            archivedLogFilenamePattern: /var/log/nexus-iq-server/clm-server-%d.log.gz
-            archivedFileCount: 50
-    imageName: registry.connect.redhat.com/sonatype/nexus-iq-server:1.128.0-ubi-1
+    imageName: registry.connect.redhat.com/sonatype/nexus-iq-server@sha256:3ed0d1bf6801085dd579b4bf2b12de31dbd0ad6ba29f34d05f8555031676697c
     imagePullPolicy: IfNotPresent
     imagePullSecret: ""
     licenseSecret: ""
@@ -114,10 +85,9 @@ spec:
     enabled: false
     labels: {}
     ports:
-    - name: nexus-service
-      port: 80
-      targetPort: 80
+      - name: nexus-service
+        port: 80
+        targetPort: 80
   serviceAccount:
     create: true
     name: null
-  
