@@ -24,6 +24,9 @@ spec:
       containers:
       - name: {{ template "iqserver.fullname" . }}
         image: {{ .Values.iq.imageName }}
+        env:
+          - name: SONATYPE_INTERNAL_HOST_SYSTEM
+            value: Operator
         ports:
         - containerPort: {{ .Values.iq.applicationPort }}
         lifecycle:
