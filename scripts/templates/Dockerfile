@@ -1,5 +1,5 @@
 # {{templateWarning}}
-FROM quay.io/operator-framework/helm-operator:v1.9.1
+FROM quay.io/operator-framework/helm-operator:v1.18.0
 
 # Required OpenShift Labels
 LABEL name="Nexus IQ Server Operator" \
