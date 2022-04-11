@@ -33,6 +33,12 @@ metadata:
             "iq": {
               "adminPort": 8071,
               "applicationPort": 8070,
+              "env": [
+                {
+                  "name": "JAVA"_OPTS,
+                  "value": "-Djava.util.prefs.userRoot=$(SONATYPE_WORK)/javaprefs"
+                }
+              ],
               "configYaml": {
                 "sonatypeWork": "/sonatype-work",
                 "createSampleData": true,
