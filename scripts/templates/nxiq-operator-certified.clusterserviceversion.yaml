@@ -218,6 +218,7 @@ spec:
     | `iq.applicationPort` | Port of the application connector. Must match the value in the `configYaml` property | `8070`            |
     | `iq.adminPort`       | Port of the application connector. Must match the value in the `configYaml` property | `8071`            |
     | `iq.memory`          | The amount of RAM to allocate                                | `1Gi`             |
+    | `iq.env`             | Customize the server environment, including `JAVA_OPTS`      | See example YAML show when ceating a NexusIQ. |
     | `iq.licenseSecret`   | The base-64 encoded license file to be installed at startup  | `""`              |
     | `iq.configYaml`      | A YAML block which will be used as a configuration block for IQ Server. | See example YAML shown when creating a NexusIQ. |
     | `ingress.enabled`                           | Create an ingress for Nexus         | `true`                                  |
