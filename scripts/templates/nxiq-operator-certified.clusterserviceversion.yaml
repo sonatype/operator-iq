@@ -35,7 +35,7 @@ metadata:
               "applicationPort": 8070,
               "env": [
                 {
-                  "name": "JAVA"_OPTS,
+                  "name": "JAVA_OPTS",
                   "value": "-Djava.util.prefs.userRoot=$(SONATYPE_WORK)/javaprefs"
                 }
               ],
