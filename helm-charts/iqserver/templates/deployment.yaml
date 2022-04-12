@@ -27,6 +27,9 @@ spec:
         env:
           - name: SONATYPE_INTERNAL_HOST_SYSTEM
             value: Operator
+          - name: SONATYPE_WORK
+            value: {{ .Values.iq.configYaml.sonatypeWork }}
+          {{- toYaml .Values.iq.env | nindent 10 }}
         ports:
         - containerPort: {{ .Values.iq.applicationPort }}
         lifecycle:

@@ -11,6 +11,9 @@ iq:
   applicationPort: 8070
   adminPort: 8071
   memory: 1Gi
+  env:
+    - name: JAVA_OPTS
+      value: "-Djava.util.prefs.userRoot=$(SONATYPE_WORK)/javaprefs"
   # base 64 encoded license file with no line breaks
   licenseSecret: ""
   # configYaml is the full text of the config.yml file that will be passed to IQ Server
