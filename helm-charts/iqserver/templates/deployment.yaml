@@ -6,6 +6,10 @@ metadata:
     app: {{ template "iqserver.fullname" . }}
 spec:
   replicas: 1
+  {{- if .Values.deploymentStrategy }}
+  strategy:
+{{ toYaml .Values.deploymentStrategy | indent 4 }}
+  {{- end }}
   selector:
     matchLabels:
       app: {{ template "iqserver.fullname" . }}

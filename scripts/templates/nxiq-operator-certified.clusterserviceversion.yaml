@@ -21,6 +21,9 @@ metadata:
                 "command": null
               }
             },
+            "deploymentStrategy": {
+              "type": "Recreate"
+            },
             "fullnameOverride": "",
             "imagePullSecrets": [],
             "ingress": {
