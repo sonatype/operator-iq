@@ -100,7 +100,8 @@ deployment:
   # Uncomment and modify this to run a command after starting the IQ Server
   postStart:
     command:    # '["/bin/sh", "-c", "ls"]'
-
+deploymentStrategy:
+  type: Recreate
 ingress:
   enabled: false
   annotations: {}

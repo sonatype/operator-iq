@@ -21,6 +21,9 @@ metadata:
                 "command": null
               }
             },
+            "deploymentStrategy": {
+              "type": "Recreate"
+            },
             "fullnameOverride": "",
             "imagePullSecrets": [],
             "ingress": {
@@ -235,6 +238,7 @@ spec:
     | `ingress.tls.enabled`                       | Enable TLS                          | `true`                                 |
     | `ingress.tls.secretName`                    | Name of the secret storing TLS cert, `false` to use the Ingress' default certificate | `nexus-tls`                             |
     | `ingress.path`                              | Path for ingress rules. GCP users should set to `/*` | `/`                    |
+    | `deploymentStrategy.type`                   | Deployment Strategy                 |  `Recreate` |
     | `deployment.preStart.command`               | Command to run before starting the IQ Server container  | `nil`                   |
     | `deployment.postStart.command`              | Command to run after starting the IQ Server container  | `nil`                    |
     | `deployment.terminationGracePeriodSeconds` | Time to allow for clean shutdown                        | 120                      |

@@ -12,6 +12,8 @@ spec:
       command: null
     preStart:
       command: null
+  deploymentStrategy:
+    type: Recreate
   fullnameOverride: ""
   imagePullSecrets: []
   ingress:
