@@ -10,8 +10,6 @@ spec:
   deployment:
     postStart:
       command: null
-    preStart:
-      command: null
   deploymentStrategy:
     type: Recreate
   fullnameOverride: ""

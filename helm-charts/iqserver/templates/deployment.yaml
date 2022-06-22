@@ -42,7 +42,6 @@ spec:
               exec:
                 command: {{ .Values.deployment.postStart.command }}
             {{- end }}
-            {{- if .Values.deployment.preStart.command }}
           resources:
             limits:
               memory: {{ .Values.iq.memory }}
