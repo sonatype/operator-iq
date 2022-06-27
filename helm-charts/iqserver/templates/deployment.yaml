@@ -56,7 +56,10 @@ spec:
             - mountPath: /etc/nexus-iq-license
               name: license-volume
             {{- end }}
+      {{- if .Values.deployment.initContainers }}
       initContainers:
+        {{- toYaml .Values.initContainers | nindent 8 }}
+      {{- end}}
       volumes:
         - name: nxiq-pv-data
           persistentVolumeClaim:

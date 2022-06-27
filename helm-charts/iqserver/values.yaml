@@ -93,10 +93,11 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name:
 
+# initContainers:
+#   - name: an-init-container
+#     image: busybox:1.28
+#     command: ['sh', '-c', 'echo "initializing"']
 deployment:
-  # Uncomment and modify this to run a command before starting the IQ Server
-  preStart:
-    command:    # '["/bin/rm", "-f", "/path/to/lockfile"]'
   # Uncomment and modify this to run a command after starting the IQ Server
   postStart:
     command:    # '["/bin/sh", "-c", "ls"]'

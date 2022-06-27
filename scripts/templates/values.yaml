@@ -99,6 +99,10 @@ deployment:
     command:    # '["/bin/sh", "-c", "ls"]'
 deploymentStrategy:
   type: Recreate
+# initContainers:
+#   - name: an-init-container
+#     image: busybox:1.28
+#     command: ['sh', '-c', 'echo "initializing"']
 ingress:
   enabled: false
   annotations: {}
