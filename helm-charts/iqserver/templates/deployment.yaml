@@ -26,36 +26,36 @@ spec:
       terminationGracePeriodSeconds: {{ .Values.deployment.terminationGracePeriodSeconds }}
       {{- end }}
       containers:
-        - name: {{ template "iqserver.fullname" . }}
-          image: {{ .Values.iq.imageName }}
-          env:
-            - name: SONATYPE_INTERNAL_HOST_SYSTEM
-              value: Operator
-            - name: SONATYPE_WORK
-              value: {{ .Values.iq.configYaml.sonatypeWork }}
-            {{- toYaml .Values.iq.env | nindent 10 }}
-          ports:
-            - containerPort: {{ .Values.iq.applicationPort }}
-          lifecycle:
-            {{- if .Values.deployment.postStart.command }}
-            postStart:
-              exec:
-                command: {{ .Values.deployment.postStart.command }}
-            {{- end }}
-          resources:
-            limits:
-              memory: {{ .Values.iq.memory }}
-          volumeMounts:
-            - mountPath: /sonatype-work
-              name: nxiq-pv-data
-            - mountPath: /var/log/nexus-iq-server
-              name: nxiq-pv-log
-            - mountPath: /etc/nexus-iq-server
-              name: config-volume
-            {{- if .Values.iq.licenseSecret }}
-            - mountPath: /etc/nexus-iq-license
-              name: license-volume
-            {{- end }}
+      - name: {{ template "iqserver.fullname" . }}
+        image: {{ .Values.iq.imageName }}
+        env:
+          - name: SONATYPE_INTERNAL_HOST_SYSTEM
+            value: Operator
+          - name: SONATYPE_WORK
+            value: {{ .Values.iq.configYaml.sonatypeWork }}
+          {{- toYaml .Values.iq.env | nindent 10 }}
+        ports:
+        - containerPort: {{ .Values.iq.applicationPort }}
+        lifecycle:
+          {{- if .Values.deployment.postStart.command }}
+          postStart:
+            exec:
+              command: {{ .Values.deployment.postStart.command }}
+          {{- end }}
+        resources:
+          limits:
+            memory: {{ .Values.iq.memory }}
+        volumeMounts:
+          - mountPath: /sonatype-work
+            name: nxiq-pv-data
+          - mountPath: /var/log/nexus-iq-server
+            name: nxiq-pv-log
+          - mountPath: /etc/nexus-iq-server
+            name: config-volume
+          {{- if .Values.iq.licenseSecret }}
+          - mountPath: /etc/nexus-iq-license
+            name: license-volume
+          {{- end }}
       {{- if .Values.initContainers }}
       initContainers:
         {{- toYaml .Values.initContainers | nindent 8 }}
