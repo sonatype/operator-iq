@@ -56,7 +56,7 @@ spec:
             - mountPath: /etc/nexus-iq-license
               name: license-volume
             {{- end }}
-      {{- if .Values.deployment.initContainers }}
+      {{- if .Values.initContainers }}
       initContainers:
         {{- toYaml .Values.initContainers | nindent 8 }}
       {{- end}}
