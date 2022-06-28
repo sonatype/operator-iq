@@ -5,8 +5,7 @@ kind: NexusIQ
 metadata:
   name: example-nexusiq
 spec:
-  # Default values copied from <project_dir>/helm-charts/iqserver/values.yaml
-
+  # Uncomment and modify this to run a command before starting the IQ Server
   # initContainers:
   #   - name: an-init-container
   #     image: busybox:1.28
