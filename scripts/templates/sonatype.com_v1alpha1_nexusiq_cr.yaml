@@ -10,7 +10,7 @@ spec:
   # initContainers:
   #   - name: an-init-container
   #     image: busybox:1.28
-  #     command: ['sh', '-c', 'echo "initializing"']
+  #     command: ['/bin/sh', '-c', 'echo "initializing"']
   deployment:
     postStart:
       command: null
