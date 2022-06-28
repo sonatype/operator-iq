@@ -16,9 +16,6 @@ metadata:
             "deployment": {
               "postStart": {
                 "command": null
-              },
-              "preStart": {
-                "command": null
               }
             },
             "deploymentStrategy": {
@@ -239,7 +236,7 @@ spec:
     | `ingress.tls.secretName`                    | Name of the secret storing TLS cert, `false` to use the Ingress' default certificate | `nexus-tls`                             |
     | `ingress.path`                              | Path for ingress rules. GCP users should set to `/*` | `/`                    |
     | `deploymentStrategy.type`                   | Deployment Strategy                 |  `Recreate` |
-    | `deployment.preStart.command`               | Command to run before starting the IQ Server container  | `nil`                   |
+    | `initContainers`                            | Containers to run before starting the server | `nil` |
     | `deployment.postStart.command`              | Command to run after starting the IQ Server container  | `nil`                    |
     | `deployment.terminationGracePeriodSeconds` | Time to allow for clean shutdown                        | 120                      |
     | `persistence.storageClass` | The provisioner class                        | `-` (disables dynamic provisioning)            |
@@ -251,7 +248,6 @@ spec:
 
     You can define the `config.yml` for IQ Server in your CRD on startup.
     It is the `iq.configYaml` property. For more details, see the [Configuring IQ Server](https://help.sonatype.com/iqserver/configuring) help page.
-
 
     ## Installing the License
 
@@ -289,6 +285,19 @@ spec:
           adminConnectors:
             - type: http
               port: 8071
+    ```
+
+    ## Running Commands Before Initialization of the Server
+
+    If you need custom initialization, you can use standard Kubernetes
+    [`initContainers`](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/)
+    to run any series of containers and commands you need.
+
+    ```yaml
+    initContainers:
+      - name: an-init-container
+        image: busybox:1.28
+        command: ['/bin/sh', '-c', 'echo "initializing"']
     ```
   displayName: Nexus IQ Operator
   icon:
