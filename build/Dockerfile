@@ -1,5 +1,5 @@
 # DO NOT MODIFY. This is produced by template.
-FROM quay.io/operator-framework/helm-operator:v1.22.2
+FROM quay.io/operator-framework/helm-operator:v1.23.0
 
 # Required OpenShift Labels
 LABEL name="Nexus IQ Server Operator" \
@@ -8,6 +8,14 @@ LABEL name="Nexus IQ Server Operator" \
       release="1" \
       summary="Nexus IQ Server is a policy engine powered by precise intelligence on open source components." \
       description="Nexus IQ Server is a policy engine powered by precise intelligence on open source components."
+
+USER root
+
+RUN microdnf update -y \
+    && microdnf clean all
+
+# back to helm-operator's user
+USER 1001
 
 # Required Licenses
 COPY licenses /licenses
