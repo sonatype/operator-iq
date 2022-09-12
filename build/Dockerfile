@@ -1,10 +1,10 @@
 # DO NOT MODIFY. This is produced by template.
-FROM quay.io/operator-framework/helm-operator:v1.19.1
+FROM quay.io/operator-framework/helm-operator:v1.22.2
 
 # Required OpenShift Labels
 LABEL name="Nexus IQ Server Operator" \
       vendor="Sonatype" \
-      version="1.135.0" \
+      version="1.143.0" \
       release="1" \
       summary="Nexus IQ Server is a policy engine powered by precise intelligence on open source components." \
       description="Nexus IQ Server is a policy engine powered by precise intelligence on open source components."

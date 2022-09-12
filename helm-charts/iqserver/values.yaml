@@ -5,7 +5,7 @@
 ---
 iq:
   name: nxiq
-  imageName: registry.connect.redhat.com/sonatype/nexus-iq-server:1.135.0-ubi-1
+  imageName: registry.connect.redhat.com/sonatype/nexus-iq-server:1.143.0-ubi-1
   imagePullPolicy: IfNotPresent
   imagePullSecret: ""
   applicationPort: 8070
@@ -93,14 +93,17 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name:
 
+# Uncomment and modify this to run a command before starting the IQ Server
+# initContainers:
+#   - name: an-init-container
+#     image: busybox:1.28
+#     command: ['/bin/sh', '-c', 'echo "initializing"']
 deployment:
-  # Uncomment and modify this to run a command before starting the IQ Server
-  preStart:
-    command:    # '["/bin/rm", "-f", "/path/to/lockfile"]'
   # Uncomment and modify this to run a command after starting the IQ Server
   postStart:
     command:    # '["/bin/sh", "-c", "ls"]'
-
+deploymentStrategy:
+  type: Recreate
 ingress:
   enabled: false
   annotations: {}
