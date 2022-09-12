@@ -5,13 +5,16 @@ kind: NexusIQ
 metadata:
   name: example-nexusiq
 spec:
-  # Default values copied from <project_dir>/helm-charts/iqserver/values.yaml
-
+  # Uncomment and modify this to run a command before starting the IQ Server
+  # initContainers:
+  #   - name: an-init-container
+  #     image: busybox:1.28
+  #     command: ['/bin/sh', '-c', 'echo "initializing"']
   deployment:
     postStart:
       command: null
-    preStart:
-      command: null
+  deploymentStrategy:
+    type: Recreate
   fullnameOverride: ""
   imagePullSecrets: []
   ingress:
@@ -73,7 +76,7 @@ spec:
             currentLogFilename: /var/log/nexus-iq-server/clm-server.log
             archivedLogFilenamePattern: /var/log/nexus-iq-server/clm-server-%d.log.gz
             archivedFileCount: 50
-    imageName: registry.connect.redhat.com/sonatype/nexus-iq-server@sha256:0217a5c5ea55dd31e4cd467ac4858f0cce0bc84790c3d0caad30ad069b0d5011
+    imageName: registry.connect.redhat.com/sonatype/nexus-iq-server@sha256:b40c9d810e8bd614822a1aa287a155100592c7081f683369056207c5ea4dc1db
     imagePullPolicy: IfNotPresent
     imagePullSecret: ""
     licenseSecret: ""
