@@ -292,7 +292,7 @@ spec:
     ## Adding Certificates for Your Own Trusted Certificate Authorities
 
     Specify a set of certificates to be imported into the Java trust store
-    of the running IQ Server.
+    of the running IQ Server. More than one certificate can be provided.
 
     ```yaml
     iq:
