@@ -52,13 +52,36 @@ spec:
             name: nxiq-pv-log
           - mountPath: /etc/nexus-iq-server
             name: config-volume
+          {{- if  .Values.iq.certificates }}
+          - mountPath: /etc/nexus-iq-server/jks
+            name: nxiq-pv-jks
+          {{- end }}
           {{- if .Values.iq.licenseSecret }}
           - mountPath: /etc/nexus-iq-license
             name: license-volume
           {{- end }}
-      {{- if .Values.initContainers }}
+      {{- if (or .Values.initContainers .Values.iq.certificates) }}
       initContainers:
-        {{- toYaml .Values.initContainers | nindent 8 }}
+        {{- if .Values.iq.certificates }}
+        - name: build-jks
+          image: {{ .Values.iq.imageName }}
+          command:
+            - sh
+            - '-c'
+            - 'cd /certs; for c in *; do
+                 keytool -import -alias "$c" -file "$c" -trustcacerts -noprompt
+                   -storepass changeit -keystore /etc/nexus-iq-server/jks/keystore.jks;
+               done;
+               keytool -list -storepass changeit -keystore /etc/nexus-iq-server/jks/keystore.jks'
+          volumeMounts:
+            - mountPath: /certs
+              name: certificates-volume
+            - mountPath: /etc/nexus-iq-server/jks
+              name: nxiq-pv-jks
+        {{- end }}
+        {{- if .Values.initContainers }}
+        {{ toYaml .Values.initContainers | nindent 8 }}
+        {{- end }}
       {{- end}}
       volumes:
         - name: nxiq-pv-data
@@ -77,4 +100,12 @@ spec:
         - name: license-volume
           secret:
             secretName: {{ template "iqserver.fullname" . }}-license
+  {{- end }}
+  {{- if .Values.iq.certificates }}
+        - name: certificates-volume
+          configMap:
+            name: {{ template "iqserver.fullname" . }}-certificates
+        - name: nxiq-pv-jks
+          persistentVolumeClaim:
+            claimName: {{ template "iqserver.fullname" . }}-jks
   {{- end }}

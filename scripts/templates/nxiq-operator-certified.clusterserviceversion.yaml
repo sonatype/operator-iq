@@ -36,7 +36,7 @@ metadata:
               "env": [
                 {
                   "name": "JAVA_OPTS",
-                  "value": "-Djava.util.prefs.userRoot=$(SONATYPE_WORK)/javaprefs"
+                  "value": "-Djava.util.prefs.userRoot=$(SONATYPE_WORK)/javaprefs -Djavax.net.ssl.trustStore=/etc/nexus-iq-server/jks/keystore.jks"
                 }
               ],
               "configYaml": {
@@ -118,7 +118,8 @@ metadata:
               "imagePullSecret": "",
               "licenseSecret": "",
               "memory": "1Gi",
-              "name": "nxiq"
+              "name": "nxiq",
+              "certificates": {}
             },
             "nameOverride": "",
             "persistence": {
@@ -230,6 +231,8 @@ spec:
     | `iq.env`             | Customize the server environment, including `JAVA_OPTS`      | See example YAML show when ceating a NexusIQ. |
     | `iq.licenseSecret`   | The base-64 encoded license file to be installed at startup  | `""`              |
     | `iq.configYaml`      | A YAML block which will be used as a configuration block for IQ Server. | See example YAML shown when creating a NexusIQ. |
+    |
+       `iq.certificates`   | Add your own certificates for your own trusted Certificate Authorities with names and plain armored text. | `{}` |
     | `ingress.enabled`                           | Create an ingress for Nexus         | `true`                                  |
     | `ingress.annotations`                       | Annotations to enhance ingress configuration  | `{}`                          |
     | `ingress.tls.enabled`                       | Enable TLS                          | `true`                                 |
@@ -285,6 +288,20 @@ spec:
           adminConnectors:
             - type: http
               port: 8071
+    ```
+
+    ## Adding Certificates for Your Own Trusted Certificate Authorities
+
+    Specify a set of certificates to be imported into the Java trust store
+    of the running IQ Server.
+
+    ```yaml
+    iq:
+      certificates:
+        my-company-cert: |
+          -----BEGIN CERTIFICATE-----
+          ...
+          -----END CERTIFICATE-----
     ```
 
     ## Running Commands Before Initialization of the Server
