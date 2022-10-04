@@ -35,7 +35,7 @@ spec:
             value: {{ .Values.iq.configYaml.sonatypeWork }}
           {{- toYaml .Values.iq.env | nindent 10 }}
         ports:
-        - containerPort: {{ .Values.iq.applicationPort }}
+          - containerPort: {{ .Values.iq.applicationPort }}
         lifecycle:
           {{- if .Values.deployment.postStart.command }}
           postStart:
