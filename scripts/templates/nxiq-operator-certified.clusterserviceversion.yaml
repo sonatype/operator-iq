@@ -231,8 +231,7 @@ spec:
     | `iq.env`             | Customize the server environment, including `JAVA_OPTS`      | See example YAML show when ceating a NexusIQ. |
     | `iq.licenseSecret`   | The base-64 encoded license file to be installed at startup  | `""`              |
     | `iq.configYaml`      | A YAML block which will be used as a configuration block for IQ Server. | See example YAML shown when creating a NexusIQ. |
-    |
-       `iq.certificates`   | Add your own certificates for your own trusted Certificate Authorities with names and plain armored text. | `{}` |
+    | `iq.certificates`   | Add your own certificates for your own trusted Certificate Authorities with names and plain armored text. | `{}` |
     | `ingress.enabled`                           | Create an ingress for Nexus         | `true`                                  |
     | `ingress.annotations`                       | Annotations to enhance ingress configuration  | `{}`                          |
     | `ingress.tls.enabled`                       | Enable TLS                          | `true`                                 |
