@@ -28,7 +28,8 @@ spec:
     applicationPort: 8070
     env:
       - name: JAVA_OPTS
-        value: "-Djava.util.prefs.userRoot=$(SONATYPE_WORK)/javaprefs"
+        value: "-Djava.util.prefs.userRoot=$(SONATYPE_WORK)/javaprefs
+                -Djavax.net.ssl.trustStore=/etc/nexus-iq-server/jks/keystore.jks"
     configYaml:
       sonatypeWork: /sonatype-work
       createSampleData: true
@@ -82,6 +83,7 @@ spec:
     licenseSecret: ""
     memory: 1Gi
     name: nxiq
+    certificates: {}
   nameOverride: ""
   persistence:
     accessMode: ReadWriteOnce

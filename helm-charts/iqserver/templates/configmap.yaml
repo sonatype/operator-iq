@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -5,3 +6,13 @@ metadata:
 data:
   config.yml: |
 {{ toYaml .Values.iq.configYaml | indent 4 }}
+
+{{ if .Values.iq.certificates }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "iqserver.fullname" . }}-certificates
+data:
+{{ toYaml .Values.iq.certificates | indent 2 }}
+{{- end }}

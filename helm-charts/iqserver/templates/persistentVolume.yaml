@@ -1,8 +1,21 @@
 {{- if .Values.persistence.volumeConfiguration -}}
+---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: {{ template "iqserver.fullname" . }}-data
+spec:
+  accessModes:
+    - {{ .Values.persistence.accessMode }}
+  capacity:
+    storage: {{ .Values.persistence.storageSize }}
+  persistentVolumeReclaimPolicy: Recycle
+{{ toYaml .Values.persistence.volumeConfiguration | indent 2 }}
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ template "iqserver.fullname" . }}-jks
 spec:
   accessModes:
     - {{ .Values.persistence.accessMode }}
