@@ -68,11 +68,17 @@ spec:
           command:
             - sh
             - '-c'
-            - 'cd /certs; for c in *; do
-                 keytool -import -alias "$c" -file "$c" -trustcacerts -noprompt
-                   -storepass changeit -keystore /etc/nexus-iq-server/jks/keystore.jks;
+            - 'cp -v /usr/lib/jvm/jre/lib/security/cacerts
+                 /etc/nexus-iq-server/jks/keystore.jks;
+               chmod 644 /etc/nexus-iq-server/jks/keystore.jks;
+               cd /certs; for c in *; do
+                 keytool -import -alias "$c" -file "$c"
+                   -trustcacerts -noprompt
+                   -storepass changeit
+                   -keystore /etc/nexus-iq-server/jks/keystore.jks;
                done;
-               keytool -list -storepass changeit -keystore /etc/nexus-iq-server/jks/keystore.jks'
+               keytool -list -storepass changeit
+                   -keystore /etc/nexus-iq-server/jks/keystore.jks'
           volumeMounts:
             - mountPath: /certs
               name: certificates-volume
