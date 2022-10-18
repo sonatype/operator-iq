@@ -32,13 +32,13 @@ and push your operator image to quay.io to make it available for installation.
 8. Expose the new IQ Server outside the cluster: 
    1. Create a Route in OpenShift UI to the new service, using:
       
-      **Port:** 8070 → 8070.
+      **Port:** 8070 -> 8070.
 
       **Service:** example-nexusiq-iqserver-{id}
 9. Visit the new URL shown on the Route page in OpenShift UI. And verfify everything on the IQ Server side is working as expected.
 10. Default credentials are `admin`/`admin123`.
 
-(*) You can get the tag of Nexus IQ Server Certified Image from [https://catalog.redhat.com/](https://catalog.redhat.com/) → Software → Container images → Find Nexus IQ Server. And the image id in the **Digest** section of this page.
+(*) You can get the tag of Nexus IQ Server Certified Image from the [Red Hat Catalog](https://catalog.redhat.com/software/containers/sonatype/nexus-iq-server/5e5d8063ac3db90370816c66?container-tabs=gti). And the image id from the **Manifest List Digest**.
   
 ## Uninstall Nexus IQ from a Local Test Cluster
 
