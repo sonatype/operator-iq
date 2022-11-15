@@ -28,6 +28,16 @@ spec:
       containers:
       - name: {{ template "iqserver.fullname" . }}
         image: {{ .Values.iq.imageName }}
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
+          runAsUser: 1000
+          runAsGroup: 1000
+          seccompProfile:
+            type: RuntimeDefault
+          capabilities:
+            drop:
+              - ALL
         env:
           - name: SONATYPE_INTERNAL_HOST_SYSTEM
             value: Operator
