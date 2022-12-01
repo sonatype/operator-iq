@@ -30,8 +30,6 @@ spec:
         image: {{ .Values.iq.imageName }}
         securityContext:
           allowPrivilegeEscalation: false
-          seccompProfile:
-            type: RuntimeDefault
           capabilities:
             drop:
               - ALL
