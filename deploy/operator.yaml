@@ -18,8 +18,16 @@ spec:
       containers:
         - name: nxiq-operator-certified
           # Replace this with the built image name
-          image: registry.connect.redhat.com/sonatype/nxiq-operator-certified@sha256:7a38ff3bc23296c2d2dd4146462951a99410b21b28b94c3cfa5bfd872d0e4ec9
+          image: registry.connect.redhat.com/sonatype/nxiq-operator-certified@sha256:a15580aaeb8842c817b28bf854afc5c8f73bdf5b9f74f38387ff53370bcaa152
           imagePullPolicy: Always
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              drop:
+                - ALL
           env:
             - name: WATCH_NAMESPACE
               valueFrom:
@@ -32,4 +40,4 @@ spec:
             - name: OPERATOR_NAME
               value: "nxiq-operator-certified"
             - name: RELATED_IMAGE_IQ
-              value: registry.connect.redhat.com/sonatype/nexus-iq-server@sha256:b40c9d810e8bd614822a1aa287a155100592c7081f683369056207c5ea4dc1db
+              value: registry.connect.redhat.com/sonatype/nexus-iq-server@sha256:c11ce31d89f0e0a5f8d182aafc7199e98b3030d54fbf30fbadc955ce7937d7fb

@@ -28,7 +28,8 @@ spec:
     applicationPort: 8070
     env:
       - name: JAVA_OPTS
-        value: "-Djava.util.prefs.userRoot=$(SONATYPE_WORK)/javaprefs"
+        value: "-Djava.util.prefs.userRoot=$(SONATYPE_WORK)/javaprefs
+                -Djavax.net.ssl.trustStore=/etc/nexus-iq-server/jks/keystore.jks"
     configYaml:
       sonatypeWork: /sonatype-work
       createSampleData: true
@@ -76,12 +77,13 @@ spec:
             currentLogFilename: /var/log/nexus-iq-server/clm-server.log
             archivedLogFilenamePattern: /var/log/nexus-iq-server/clm-server-%d.log.gz
             archivedFileCount: 50
-    imageName: registry.connect.redhat.com/sonatype/nexus-iq-server@sha256:b40c9d810e8bd614822a1aa287a155100592c7081f683369056207c5ea4dc1db
+    imageName: registry.connect.redhat.com/sonatype/nexus-iq-server@sha256:c11ce31d89f0e0a5f8d182aafc7199e98b3030d54fbf30fbadc955ce7937d7fb
     imagePullPolicy: IfNotPresent
     imagePullSecret: ""
     licenseSecret: ""
     memory: 1Gi
     name: nxiq
+    certificates: {}
   nameOverride: ""
   persistence:
     accessMode: ReadWriteOnce
