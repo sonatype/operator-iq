@@ -36,13 +36,33 @@ and push your operator image to quay.io to make it available for installation.
    2. By executing `kubectl get pods` you should see a pod running in Openshift:
 
       `example-nexusiq-iqserver-{id}`
+
+> If `install.sh` does not work out of the box with "stderr.log: Permission Denied" error, try using a different namespace.
+> You can do this by creating a namespace first with
+
+```
+oc create ns nxiq9
+```
+
+> Then modify both `install.sh` and `uninstall.sh` files to include the following suffix for each command:
+
+```
+-n nxiq9
+```
+
+> For example, the first command in `install.sh` will become:
+
+```
+kubectl apply -f deploy/service_account.yaml -n nxiq9
+```
+
 8. Expose the new IQ Server outside the cluster: 
    1. Create a Route in OpenShift UI to the new service, using:
       
       **Port:** 8070 -> 8070.
 
       **Service:** example-nexusiq-iqserver-{id}
-9. Visit the new URL shown on the Route page in OpenShift UI. And verfify everything on the IQ Server side is working as expected.
+9. Visit the new URL shown on the Route page in OpenShift UI. And verify everything on the IQ Server side is working as expected.
 10. Default credentials are `admin`/`admin123`.
 
 ## Uninstall Nexus IQ from a Local Test Cluster
