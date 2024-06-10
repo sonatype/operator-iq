@@ -37,20 +37,20 @@ and push your operator image to quay.io to make it available for installation.
 
       `example-nexusiq-iqserver-{id}`
 
-> If `install.sh` does not work out of the box with "stderr.log: Permission Denied" error, try using a different namespace.
-> You can do this by creating a namespace first with
+If `install.sh` does not work out of the box with "stderr.log: Permission Denied" error, try using a different namespace.
+You can do this by creating a namespace first with
 
 ```
 oc create ns nxiq9
 ```
 
-> Then modify both `install.sh` and `uninstall.sh` files to include the following suffix for each command:
+Then modify both `install.sh` and `uninstall.sh` files to include the following suffix for each command:
 
 ```
 -n nxiq9
 ```
 
-> For example, the first command in `install.sh` will become:
+For example, the first command in `install.sh` will become:
 
 ```
 kubectl apply -f deploy/service_account.yaml -n nxiq9
