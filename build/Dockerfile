@@ -7,7 +7,8 @@ LABEL name="Nexus IQ Server Operator" \
       version="1.185.0" \
       release="1" \
       summary="Nexus IQ Server is a policy engine powered by precise intelligence on open source components." \
-      description="Nexus IQ Server is a policy engine powered by precise intelligence on open source components."
+      description="Nexus IQ Server is a policy engine powered by precise intelligence on open source components." \
+      maintainer="Sonatype"
 
 USER root
 
