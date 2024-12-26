@@ -18,7 +18,7 @@ spec:
       containers:
         - name: nxiq-operator-certified
           # Replace this with the built image name
-          image: registry.connect.redhat.com/sonatype/nxiq-operator-certified@sha256:c4ab017eb5f79d1a959ada5ee5e5686072695068527456e1e66a5f9852f0cd5a
+          image: registry.connect.redhat.com/sonatype/nxiq-operator-certified@sha256:e7f342d7940a639259c700af22795c5d4d3a80c564c4d5df966124300b894cf9
           imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false
@@ -40,4 +40,4 @@ spec:
             - name: OPERATOR_NAME
               value: "nxiq-operator-certified"
             - name: RELATED_IMAGE_IQ
-              value: registry.connect.redhat.com/sonatype/nexus-iq-server@sha256:7dfd3153605693597ac94432b4afcc5d3ca49175e734228829dce06aedbead3f
+              value: registry.connect.redhat.com/sonatype/nexus-iq-server@sha256:56f446ebdbd6c2d4d037e3d1b0c6cb996bd29074d4c88219d60d947c4c5154d0
