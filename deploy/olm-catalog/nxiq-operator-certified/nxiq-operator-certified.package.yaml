@@ -1,7 +1,7 @@
 # DO NOT MODIFY. This is produced by template.
 ---
 channels:
-  - currentCSV: nxiq-operator-certified.v1.185.0-1
+  - currentCSV: nxiq-operator-certified.v1.192.0-1
     name: stable
 defaultChannel: stable
 packageName: nxiq-operator-certified
