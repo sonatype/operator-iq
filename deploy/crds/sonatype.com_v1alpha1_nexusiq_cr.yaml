@@ -77,7 +77,7 @@ spec:
             currentLogFilename: /var/log/nexus-iq-server/clm-server.log
             archivedLogFilenamePattern: /var/log/nexus-iq-server/clm-server-%d.log.gz
             archivedFileCount: 50
-    imageName: registry.connect.redhat.com/sonatype/nexus-iq-server@sha256:56f446ebdbd6c2d4d037e3d1b0c6cb996bd29074d4c88219d60d947c4c5154d0
+    imageName: registry.connect.redhat.com/sonatype/nexus-iq-server@sha256:d65df6bdff1f32bf32a87e5cb38f5e9f98b75b81e9acccbffbd967e1f71691f0
     imagePullPolicy: IfNotPresent
     imagePullSecret: ""
     licenseSecret: ""
