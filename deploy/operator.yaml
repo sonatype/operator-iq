@@ -18,7 +18,7 @@ spec:
       containers:
         - name: nxiq-operator-certified
           # Replace this with the built image name
-          image: sha256:948de200bf4ea99f5cc96a1dc544c07057c9b3d1fd2b6703bd32b2d773f52e2f
+          image: registry.connect.redhat.com/sonatype/nxiq-operator-certified@sha256:948de200bf4ea99f5cc96a1dc544c07057c9b3d1fd2b6703bd32b2d773f52e2f
           imagePullPolicy: Always
           securityContext:
             allowPrivilegeEscalation: false
