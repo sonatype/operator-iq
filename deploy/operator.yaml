@@ -40,4 +40,4 @@ spec:
             - name: OPERATOR_NAME
               value: "nxiq-operator-certified"
             - name: RELATED_IMAGE_IQ
-              value: sha256:56f446ebdbd6c2d4d037e3d1b0c6cb996bd29074d4c88219d60d947c4c5154d0
+              value: registry.connect.redhat.com/sonatype/nxiq-operator-certified@sha256:948de200bf4ea99f5cc96a1dc544c07057c9b3d1fd2b6703bd32b2d773f52e2f
