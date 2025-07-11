@@ -73,16 +73,17 @@ spec:
           command:
             - sh
             - '-c'
-            - 'cp -v /usr/lib/jvm/jre/lib/security/cacerts
+            - 'JAVA_HOME=/opt/sonatype/nexus-iq-server;
+               cp -v $JAVA_HOME/lib/security/cacerts
                  /etc/nexus-iq-server/jks/keystore.jks;
                chmod 644 /etc/nexus-iq-server/jks/keystore.jks;
                cd /certs; for c in *; do
-                 keytool -import -alias "$c" -file "$c"
+                 $JAVA_HOME/bin/keytool -import -alias "$c" -file "$c"
                    -trustcacerts -noprompt
                    -storepass changeit
                    -keystore /etc/nexus-iq-server/jks/keystore.jks;
                done;
-               keytool -list -storepass changeit
+               $JAVA_HOME/bin/keytool -list -storepass changeit
                    -keystore /etc/nexus-iq-server/jks/keystore.jks'
           volumeMounts:
             - mountPath: /certs
