@@ -50,6 +50,7 @@ spec:
         resources:
           limits:
             memory: {{ .Values.iq.memory }}
+            cpu: {{ .Values.iq.cpu }}
         volumeMounts:
           - mountPath: /sonatype-work
             name: nxiq-pv-data

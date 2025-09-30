@@ -11,6 +11,7 @@ iq:
   applicationPort: 8070
   adminPort: 8071
   memory: 1Gi
+  cpu: 1
   env:
     - name: JAVA_OPTS
       value: "-Djava.util.prefs.userRoot=$(SONATYPE_WORK)/javaprefs
